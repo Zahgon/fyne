@@ -2,32 +2,23 @@ package embedded
 
 import "fyne.io/fyne/v2"
 
-// TouchDownEvent is for indicating that an embedded device touch screen or pointing device was pressed.
-//
-// Since: 2.7
 type TouchDownEvent struct {
 	Position fyne.Position
 	ID       int
 }
 
-func (t *TouchDownEvent) isEvent() {}
+func (t *TouchDownEvent) isEvent() { _ = "STUB: not implemented"; return }
 
-// TouchMoveEvent is for indicating that an embedded device touch screen or pointing device was moved whilst being pressed.
-//
-// Since: 2.7
 type TouchMoveEvent struct {
 	Position fyne.Position
 	ID       int
 }
 
-func (t *TouchMoveEvent) isEvent() {}
+func (t *TouchMoveEvent) isEvent() { _ = "STUB: not implemented"; return }
 
-// TouchUpEvent is for indicating that an embedded device touch screen or pointing device was released.
-//
-// Since: 2.7
 type TouchUpEvent struct {
 	Position fyne.Position
 	ID       int
 }
 
-func (t *TouchUpEvent) isEvent() {}
+func (t *TouchUpEvent) isEvent() { _ = "STUB: not implemented"; return }

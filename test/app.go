@@ -1,5 +1,4 @@
-// Package test provides utility drivers for running UI tests without rendering to a screen.
-package test // import "fyne.io/fyne/v2/test"
+package test
 
 import (
 	"net/url"
@@ -7,16 +6,9 @@ import (
 	"time"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/internal"
 	intapp "fyne.io/fyne/v2/internal/app"
-	"fyne.io/fyne/v2/internal/cache"
-	"fyne.io/fyne/v2/internal/painter"
-	"fyne.io/fyne/v2/internal/scheduler"
-	"fyne.io/fyne/v2/internal/test"
-	"fyne.io/fyne/v2/theme"
 )
 
-// ensure we have a dummy app loaded and ready to test
 func init() {
 	NewApp()
 }
@@ -32,7 +24,6 @@ type app struct {
 	clip         fyne.Clipboard
 	cloud        fyne.CloudProvider
 
-	// user action variables
 	appliedTheme              fyne.Theme
 	lastNotification          *fyne.Notification
 	scheduledNotifications    map[string]*fyne.ScheduledNotification
@@ -41,170 +32,62 @@ type app struct {
 }
 
 func (a *app) CloudProvider() fyne.CloudProvider {
-	return a.cloud
+	_ = "STUB: not implemented"
+	return *new(fyne.CloudProvider)
 }
 
-func (a *app) Icon() fyne.Resource {
-	return nil
-}
+func (a *app) Icon() fyne.Resource { _ = "STUB: not implemented"; return *new(fyne.Resource) }
 
-func (a *app) SetIcon(fyne.Resource) {
-	// no-op
-}
+func (a *app) SetIcon(fyne.Resource) { _ = "STUB: not implemented"; return }
 
 func (a *app) NewWindow(title string) fyne.Window {
-	return a.driver.CreateWindow(title)
+	_ = "STUB: not implemented"
+	return *new(fyne.Window)
 }
 
-func (a *app) OpenURL(_ *url.URL) error {
-	// no-op
-	return nil
-}
+func (a *app) OpenURL(_ *url.URL) error { _ = "STUB: not implemented"; return nil }
 
-func (a *app) Run() {
-	// no-op
-}
+func (a *app) Run() { _ = "STUB: not implemented"; return }
 
-func (a *app) Quit() {
-	// no-op
-}
+func (a *app) Quit() { _ = "STUB: not implemented"; return }
 
-func (a *app) Cache() fyne.Cache {
-	return a.cache
-}
+func (a *app) Cache() fyne.Cache { _ = "STUB: not implemented"; return *new(fyne.Cache) }
 
-func (a *app) Clipboard() fyne.Clipboard {
-	return a.clip
-}
+func (a *app) Clipboard() fyne.Clipboard { _ = "STUB: not implemented"; return *new(fyne.Clipboard) }
 
-func (a *app) UniqueID() string {
-	return "testApp" // TODO should this be randomised?
-}
+func (a *app) UniqueID() string { _ = "STUB: not implemented"; return "" }
 
-func (a *app) Driver() fyne.Driver {
-	return a.driver
-}
+func (a *app) Driver() fyne.Driver { _ = "STUB: not implemented"; return *new(fyne.Driver) }
 
-func (a *app) SendNotification(notify *fyne.Notification) {
-	a.propertyLock.Lock()
-	defer a.propertyLock.Unlock()
-
-	a.lastNotification = notify
-}
+func (a *app) SendNotification(notify *fyne.Notification) { _ = "STUB: not implemented"; return }
 
 func (a *app) ScheduleNotification(n *fyne.Notification, when time.Time) (*fyne.ScheduledNotification, error) {
-	id, _ := scheduler.NewID()
-	scheduled := fyne.NewScheduledNotification(id, n, when)
-
-	a.propertyLock.Lock()
-	defer a.propertyLock.Unlock()
-
-	if a.scheduledNotifications == nil {
-		a.scheduledNotifications = map[string]*fyne.ScheduledNotification{}
-	}
-	a.scheduledNotifications[id] = scheduled
-	a.lastScheduledNotification = scheduled
-	return scheduled, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (a *app) CancelScheduledNotification(id string) error {
-	a.propertyLock.Lock()
-	defer a.propertyLock.Unlock()
+func (a *app) CancelScheduledNotification(id string) error { _ = "STUB: not implemented"; return nil }
 
-	delete(a.scheduledNotifications, id)
-	a.lastCancelledScheduleID = id
+func (a *app) SetCloudProvider(p fyne.CloudProvider) { _ = "STUB: not implemented"; return }
 
-	return nil
-}
-
-func (a *app) SetCloudProvider(p fyne.CloudProvider) {
-	if p == nil {
-		a.cloud = nil
-		return
-	}
-
-	a.transitionCloud(p)
-}
-
-func (a *app) Settings() fyne.Settings {
-	return a.settings
-}
+func (a *app) Settings() fyne.Settings { _ = "STUB: not implemented"; return *new(fyne.Settings) }
 
 func (a *app) Preferences() fyne.Preferences {
-	return a.prefs
+	_ = "STUB: not implemented"
+	return *new(fyne.Preferences)
 }
 
-func (a *app) Storage() fyne.Storage {
-	return a.storage
-}
+func (a *app) Storage() fyne.Storage { _ = "STUB: not implemented"; return *new(fyne.Storage) }
 
-func (a *app) Lifecycle() fyne.Lifecycle {
-	return &a.lifecycle
-}
+func (a *app) Lifecycle() fyne.Lifecycle { _ = "STUB: not implemented"; return *new(fyne.Lifecycle) }
 
-func (a *app) Metadata() fyne.AppMetadata {
-	return fyne.AppMetadata{} // just dummy data
-}
+func (a *app) Metadata() fyne.AppMetadata { _ = "STUB: not implemented"; return *new(fyne.AppMetadata) }
 
-func (a *app) lastAppliedTheme() fyne.Theme {
-	a.propertyLock.Lock()
-	defer a.propertyLock.Unlock()
+func (a *app) lastAppliedTheme() fyne.Theme { _ = "STUB: not implemented"; return *new(fyne.Theme) }
 
-	return a.appliedTheme
-}
+func (a *app) transitionCloud(p fyne.CloudProvider) { _ = "STUB: not implemented"; return }
 
-func (a *app) transitionCloud(p fyne.CloudProvider) {
-	if a.cloud != nil {
-		a.cloud.Cleanup(a)
-	}
-
-	err := p.Setup(a)
-	if err != nil {
-		fyne.LogError("Failed to set up cloud provider "+p.ProviderName(), err)
-		return
-	}
-	a.cloud = p
-
-	listeners := a.prefs.ChangeListeners()
-	if pp, ok := p.(fyne.CloudProviderPreferences); ok {
-		a.prefs = pp.CloudPreferences(a)
-	} else {
-		a.prefs = internal.NewInMemoryPreferences()
-	}
-	if store, ok := p.(fyne.CloudProviderStorage); ok {
-		a.storage = store.CloudStorage(a)
-	} else {
-		a.storage = &testStorage{}
-	}
-
-	for _, l := range listeners {
-		a.prefs.AddChangeListener(l)
-		l() // assume that preferences have changed because we replaced the provider
-	}
-
-	// after transition ensure settings listener is fired
-	a.settings.apply()
-}
-
-// NewApp returns a new dummy app used for testing.
-// It loads a test driver which creates a virtual window in memory for testing.
-func NewApp() fyne.App {
-	settings := &testSettings{scale: 1.0, theme: Theme()}
-	prefs := internal.NewInMemoryPreferences()
-	store := &testStorage{}
-	testApp := &app{
-		settings: settings, prefs: prefs, storage: store, driver: NewDriver().(*driver), clip: NewClipboard(),
-		cache: makeCache(),
-	}
-	settings.app = testApp
-	root, _ := store.docRootURI()
-	store.Docs = &internal.Docs{RootDocURI: root}
-	painter.ClearFontCache()
-	cache.ResetThemeCaches()
-	fyne.SetCurrentApp(testApp)
-
-	return testApp
-}
+func NewApp() fyne.App { _ = "STUB: not implemented"; return *new(fyne.App) }
 
 type testSettings struct {
 	primaryColor string
@@ -218,83 +101,30 @@ type testSettings struct {
 }
 
 func (s *testSettings) AddChangeListener(listener chan fyne.Settings) {
-	s.propertyLock.Lock()
-	defer s.propertyLock.Unlock()
-	s.changeListeners = append(s.changeListeners, listener)
+	_ = "STUB: not implemented"
+	return
 }
 
-func (s *testSettings) AddListener(listener func(fyne.Settings)) {
-	s.propertyLock.Lock()
-	defer s.propertyLock.Unlock()
-	s.listeners = append(s.listeners, listener)
-}
+func (s *testSettings) AddListener(listener func(fyne.Settings)) { _ = "STUB: not implemented"; return }
 
 func (s *testSettings) BuildType() fyne.BuildType {
-	return fyne.BuildStandard
+	_ = "STUB: not implemented"
+	return *new(fyne.BuildType)
 }
 
-func (s *testSettings) PrimaryColor() string {
-	if s.primaryColor != "" {
-		return s.primaryColor
-	}
+func (s *testSettings) PrimaryColor() string { _ = "STUB: not implemented"; return "" }
 
-	return theme.ColorBlue
-}
+func (s *testSettings) SetTheme(theme fyne.Theme) { _ = "STUB: not implemented"; return }
 
-func (s *testSettings) SetTheme(theme fyne.Theme) {
-	s.propertyLock.Lock()
-	s.theme = theme
-	s.propertyLock.Unlock()
+func (s *testSettings) ShowAnimations() bool { _ = "STUB: not implemented"; return false }
 
-	s.apply()
-}
-
-func (s *testSettings) ShowAnimations() bool {
-	return true
-}
-
-func (s *testSettings) Theme() fyne.Theme {
-	s.propertyLock.RLock()
-	defer s.propertyLock.RUnlock()
-
-	if s.theme == nil {
-		return test.DarkTheme(theme.DefaultTheme())
-	}
-
-	return s.theme
-}
+func (s *testSettings) Theme() fyne.Theme { _ = "STUB: not implemented"; return *new(fyne.Theme) }
 
 func (s *testSettings) ThemeVariant() fyne.ThemeVariant {
-	return 2 // not a preference
+	_ = "STUB: not implemented"
+	return *new(fyne.ThemeVariant)
 }
 
-func (s *testSettings) Scale() float32 {
-	s.propertyLock.RLock()
-	defer s.propertyLock.RUnlock()
-	return s.scale
-}
+func (s *testSettings) Scale() float32 { _ = "STUB: not implemented"; return 0 }
 
-func (s *testSettings) apply() {
-	s.propertyLock.RLock()
-	listeners := s.changeListeners
-	listenersFns := s.listeners
-	s.propertyLock.RUnlock()
-
-	for _, listener := range listeners {
-		listener <- s
-	}
-
-	s.app.propertyLock.Lock()
-	painter.ClearFontCache()
-	cache.ResetThemeCaches()
-	intapp.ApplySettings(s, s.app)
-	s.app.propertyLock.Unlock()
-
-	for _, l := range listenersFns {
-		l(s)
-	}
-
-	s.app.propertyLock.Lock()
-	s.app.appliedTheme = s.Theme()
-	s.app.propertyLock.Unlock()
-}
+func (s *testSettings) apply() { _ = "STUB: not implemented"; return }

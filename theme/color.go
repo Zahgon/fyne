@@ -7,190 +7,81 @@ import (
 	internaltheme "fyne.io/fyne/v2/internal/theme"
 )
 
-// Keep in mind to add new constants to the tests at test/theme.go.
 const (
-	// ColorRed is the red primary color name.
-	//
-	// Since: 1.4
 	ColorRed = internaltheme.ColorRed
-	// ColorOrange is the orange primary color name.
-	//
-	// Since: 1.4
+
 	ColorOrange = internaltheme.ColorOrange
-	// ColorYellow is the yellow primary color name.
-	//
-	// Since: 1.4
+
 	ColorYellow = internaltheme.ColorYellow
-	// ColorGreen is the green primary color name.
-	//
-	// Since: 1.4
+
 	ColorGreen = internaltheme.ColorGreen
-	// ColorBlue is the blue primary color name.
-	//
-	// Since: 1.4
+
 	ColorBlue = internaltheme.ColorBlue
-	// ColorPurple is the purple primary color name.
-	//
-	// Since: 1.4
+
 	ColorPurple = internaltheme.ColorPurple
-	// ColorBrown is the brown primary color name.
-	//
-	// Since: 1.4
+
 	ColorBrown = internaltheme.ColorBrown
-	// ColorGray is the gray primary color name.
-	//
-	// Since: 1.4
+
 	ColorGray = internaltheme.ColorGray
 
-	// ColorNameBackground is the name of theme lookup for background color.
-	//
-	// Since: 2.0
 	ColorNameBackground fyne.ThemeColorName = "background"
 
-	// ColorNameButton is the name of theme lookup for button color.
-	//
-	// Since: 2.0
 	ColorNameButton fyne.ThemeColorName = "button"
 
-	// ColorNameDisabledButton is the name of theme lookup for disabled button color.
-	//
-	// Since: 2.0
 	ColorNameDisabledButton fyne.ThemeColorName = "disabledButton"
 
-	// ColorNameDisabled is the name of theme lookup for disabled foreground color.
-	//
-	// Since: 2.0
 	ColorNameDisabled fyne.ThemeColorName = "disabled"
 
-	// ColorNameError is the name of theme lookup for error color.
-	//
-	// Since: 2.0
 	ColorNameError fyne.ThemeColorName = "error"
 
-	// ColorNameFocus is the name of theme lookup for focus color.
-	//
-	// Since: 2.0
 	ColorNameFocus fyne.ThemeColorName = "focus"
 
-	// ColorNameForeground is the name of theme lookup for foreground color.
-	//
-	// Since: 2.0
 	ColorNameForeground fyne.ThemeColorName = "foreground"
 
-	// ColorNameForegroundOnError is the name of theme lookup for a contrast color to the error color.
-	//
-	// Since: 2.5
 	ColorNameForegroundOnError fyne.ThemeColorName = "foregroundOnError"
 
-	// ColorNameForegroundOnPrimary is the name of theme lookup for a contrast color to the primary color.
-	//
-	// Since: 2.5
 	ColorNameForegroundOnPrimary fyne.ThemeColorName = "foregroundOnPrimary"
 
-	// ColorNameForegroundOnSuccess is the name of theme lookup for a contrast color to the success color.
-	//
-	// Since: 2.5
 	ColorNameForegroundOnSuccess fyne.ThemeColorName = "foregroundOnSuccess"
 
-	// ColorNameForegroundOnWarning is the name of theme lookup for a contrast color to the warning color.
-	//
-	// Since: 2.5
 	ColorNameForegroundOnWarning fyne.ThemeColorName = "foregroundOnWarning"
 
-	// ColorNameHeaderBackground is the name of theme lookup for background color of a collection header.
-	//
-	// Since: 2.4
 	ColorNameHeaderBackground fyne.ThemeColorName = "headerBackground"
 
-	// ColorNameHover is the name of theme lookup for hover color.
-	//
-	// Since: 2.0
 	ColorNameHover fyne.ThemeColorName = "hover"
 
-	// ColorNameHyperlink is the name of theme lookup for hyperlink color.
-	//
-	// Since: 2.4
 	ColorNameHyperlink fyne.ThemeColorName = "hyperlink"
 
-	// ColorNameInnerWindowBorder is the name of theme lookup for background color of inner window borders.
-	//
-	// Since: 2.8
 	ColorNameInnerWindowBorder fyne.ThemeColorName = "innerWindowBorder"
 
-	// ColorNameInnerWindowBorderInactive is the name of theme lookup for background color of inner window borders
-	// when they are not the current window, defaults to the ColorNameInnerWindowBorder.
-	//
-	// Since: 2.8
 	ColorNameInnerWindowBorderInactive fyne.ThemeColorName = "innerWindowBorderInactive"
 
-	// ColorNameInputBackground is the name of theme lookup for background color of an input field.
-	//
-	// Since: 2.0
 	ColorNameInputBackground fyne.ThemeColorName = "inputBackground"
 
-	// ColorNameInputBorder is the name of theme lookup for border color of an input field.
-	//
-	// Since: 2.3
 	ColorNameInputBorder fyne.ThemeColorName = "inputBorder"
 
-	// ColorNameMenuBackground is the name of theme lookup for background color of menus.
-	//
-	// Since: 2.3
 	ColorNameMenuBackground fyne.ThemeColorName = "menuBackground"
 
-	// ColorNameOverlayBackground is the name of theme lookup for background color of overlays like dialogs.
-	//
-	// Since: 2.3
 	ColorNameOverlayBackground fyne.ThemeColorName = "overlayBackground"
 
-	// ColorNamePlaceHolder is the name of theme lookup for placeholder text color.
-	//
-	// Since: 2.0
 	ColorNamePlaceHolder fyne.ThemeColorName = "placeholder"
 
-	// ColorNamePressed is the name of theme lookup for the tap overlay color.
-	//
-	// Since: 2.0
 	ColorNamePressed fyne.ThemeColorName = "pressed"
 
-	// ColorNamePrimary is the name of theme lookup for primary color.
-	//
-	// Since: 2.0
 	ColorNamePrimary fyne.ThemeColorName = "primary"
 
-	// ColorNameScrollBar is the name of theme lookup for scrollbar color.
-	//
-	// Since: 2.0
 	ColorNameScrollBar fyne.ThemeColorName = "scrollBar"
 
-	// ColorNameScrollBarBackground is the name of theme lookup for scrollbar background color.
-	//
-	// Since: 2.6
 	ColorNameScrollBarBackground fyne.ThemeColorName = "scrollBarBackground"
 
-	// ColorNameSelection is the name of theme lookup for selection color.
-	//
-	// Since: 2.1
 	ColorNameSelection fyne.ThemeColorName = "selection"
 
-	// ColorNameSeparator is the name of theme lookup for separator bars.
-	//
-	// Since: 2.3
 	ColorNameSeparator fyne.ThemeColorName = "separator"
 
-	// ColorNameShadow is the name of theme lookup for shadow color.
-	//
-	// Since: 2.0
 	ColorNameShadow fyne.ThemeColorName = "shadow"
 
-	// ColorNameSuccess is the name of theme lookup for success color.
-	//
-	// Since: 2.3
 	ColorNameSuccess fyne.ThemeColorName = "success"
 
-	// ColorNameWarning is the name of theme lookup for warning color.
-	//
-	// Since: 2.3
 	ColorNameWarning fyne.ThemeColorName = "warning"
 )
 
@@ -264,234 +155,72 @@ var (
 	colorLightWarning                   = color.NRGBA{R: 0xff, G: 0x98, B: 0x00, A: 0xff}
 )
 
-// BackgroundColor returns the theme's background color.
-//
-// Deprecated: Use Color(theme.ColorNameBackground) instead.
-func BackgroundColor() color.Color {
-	return safeColorLookup(ColorNameBackground, currentVariant())
-}
+func BackgroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// ButtonColor returns the theme's standard button color.
-//
-// Deprecated: Use Color(theme.ColorNameButton) instead.
-func ButtonColor() color.Color {
-	return safeColorLookup(ColorNameButton, currentVariant())
-}
+func ButtonColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// Color looks up the named colour for current theme and variant.
-//
-// Since: 2.5
 func Color(name fyne.ThemeColorName) color.Color {
-	return safeColorLookup(name, currentVariant())
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }
 
-// ColorForWidget looks up the named colour for the requested widget using the current theme and variant.
-// If the widget theme has been overridden that theme will be used.
-//
-// Since: 2.5
 func ColorForWidget(name fyne.ThemeColorName, w fyne.Widget) color.Color {
-	return CurrentForWidget(w).Color(name, currentVariant())
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }
 
-// DisabledButtonColor returns the theme's disabled button color.
-//
-// Deprecated: Use Color(theme.ColorNameDisabledButton) instead.
-func DisabledButtonColor() color.Color {
-	return safeColorLookup(ColorNameDisabledButton, currentVariant())
-}
+func DisabledButtonColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// DisabledColor returns the foreground color for a disabled UI element.
-//
-// Since: 2.0
-//
-// Deprecated: Use Color(theme.ColorNameDisabled) instead.
-func DisabledColor() color.Color {
-	return safeColorLookup(ColorNameDisabled, currentVariant())
-}
+func DisabledColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// DisabledTextColor returns the theme's disabled text color - this is actually the disabled color since 1.4.
-//
-// Deprecated: Use Color(theme.ColorNameDisabled) instead.
-func DisabledTextColor() color.Color {
-	return DisabledColor()
-}
+func DisabledTextColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// ErrorColor returns the theme's error foreground color.
-//
-// Since: 2.0
-//
-// Deprecated: Use Color(theme.ColorNameError) instead.
-func ErrorColor() color.Color {
-	return safeColorLookup(ColorNameError, currentVariant())
-}
+func ErrorColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// FocusColor returns the color used to highlight a focused widget.
-//
-// Deprecated: Use Color(theme.ColorNameFocus) instead.
-func FocusColor() color.Color {
-	return safeColorLookup(ColorNameFocus, currentVariant())
-}
+func FocusColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// ForegroundColor returns the theme's standard foreground color for text and icons.
-//
-// Since: 2.0
-//
-// Deprecated: Use Color(theme.ColorNameForeground) instead.
-func ForegroundColor() color.Color {
-	return safeColorLookup(ColorNameForeground, currentVariant())
-}
+func ForegroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// HeaderBackgroundColor returns the color used to draw underneath collection headers.
-//
-// Since: 2.4
-//
-// Deprecated: Use Color(theme.ColorNameHeaderBackground) instead.
-func HeaderBackgroundColor() color.Color {
-	return Current().Color(ColorNameHeaderBackground, currentVariant())
-}
+func HeaderBackgroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// HoverColor returns the color used to highlight interactive elements currently under a cursor.
-//
-// Deprecated: Use Color(theme.ColorNameHover) instead.
-func HoverColor() color.Color {
-	return safeColorLookup(ColorNameHover, currentVariant())
-}
+func HoverColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// HyperlinkColor returns the color used for the Hyperlink widget and hyperlink text elements.
-//
-// Deprecated: Use Color(theme.ColorNameHyperlink) instead.
-func HyperlinkColor() color.Color {
-	return safeColorLookup(ColorNameHyperlink, currentVariant())
-}
+func HyperlinkColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// InputBackgroundColor returns the color used to draw underneath input elements.
-//
-// Deprecated: Use Color(theme.ColorNameInputBackground) instead.
-func InputBackgroundColor() color.Color {
-	return Current().Color(ColorNameInputBackground, currentVariant())
-}
+func InputBackgroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// InputBorderColor returns the color used to draw underneath input elements.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameInputBorder) instead.
-func InputBorderColor() color.Color {
-	return Current().Color(ColorNameInputBorder, currentVariant())
-}
+func InputBorderColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// MenuBackgroundColor returns the theme's background color for menus.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameMenuBackground) instead.
-func MenuBackgroundColor() color.Color {
-	return safeColorLookup(ColorNameMenuBackground, currentVariant())
-}
+func MenuBackgroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// OverlayBackgroundColor returns the theme's background color for overlays like dialogs.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameOverlayBackground) instead.
-func OverlayBackgroundColor() color.Color {
-	return safeColorLookup(ColorNameOverlayBackground, currentVariant())
-}
+func OverlayBackgroundColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// PlaceHolderColor returns the theme's standard text color.
-//
-// Deprecated: Use Color(theme.ColorNamePlaceHolder) instead.
-func PlaceHolderColor() color.Color {
-	return safeColorLookup(ColorNamePlaceHolder, currentVariant())
-}
+func PlaceHolderColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// PressedColor returns the color used to overlap tapped features.
-//
-// Since: 2.0
-//
-// Deprecated: Use Color(theme.ColorNamePressed) instead.
-func PressedColor() color.Color {
-	return safeColorLookup(ColorNamePressed, currentVariant())
-}
+func PressedColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// PrimaryColor returns the color used to highlight primary features.
-//
-// Deprecated: Use Color(theme.ColorNamePrimary) instead.
-func PrimaryColor() color.Color {
-	return safeColorLookup(ColorNamePrimary, currentVariant())
-}
+func PrimaryColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// PrimaryColorNamed returns a theme specific color value for a named primary color.
-//
-// Since: 1.4
-//
-// Deprecated: You should not access named primary colors but access the primary color using Color(theme.ColorNamePrimary) instead.
 func PrimaryColorNamed(name string) color.Color {
-	return internaltheme.PrimaryColorNamed(name)
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }
 
-// PrimaryColorNames returns a list of the standard primary color options.
-//
-// Since: 1.4
-func PrimaryColorNames() []string {
-	return []string{ColorRed, ColorOrange, ColorYellow, ColorGreen, ColorBlue, ColorPurple, ColorBrown, ColorGray}
-}
+func PrimaryColorNames() []string { _ = "STUB: not implemented"; return nil }
 
-// ScrollBarColor returns the color (and translucency) for a scrollBar.
-//
-// Deprecated: Use Color(theme.ColorNameScrollBar) instead.
-func ScrollBarColor() color.Color {
-	return safeColorLookup(ColorNameScrollBar, currentVariant())
-}
+func ScrollBarColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// SelectionColor returns the color for a selected element.
-//
-// Since: 2.1
-//
-// Deprecated: Use Color(theme.ColorNameSelection) instead.
-func SelectionColor() color.Color {
-	return safeColorLookup(ColorNameSelection, currentVariant())
-}
+func SelectionColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// SeparatorColor returns the color for the separator element.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameSeparator) instead.
-func SeparatorColor() color.Color {
-	return safeColorLookup(ColorNameSeparator, currentVariant())
-}
+func SeparatorColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// ShadowColor returns the color (and translucency) for shadows used for indicating elevation.
-//
-// Deprecated: Use Color(theme.ColorNameShadow) instead.
-func ShadowColor() color.Color {
-	return safeColorLookup(ColorNameShadow, currentVariant())
-}
+func ShadowColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// SuccessColor returns the theme's success foreground color.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameSuccess) instead.
-func SuccessColor() color.Color {
-	return safeColorLookup(ColorNameSuccess, currentVariant())
-}
+func SuccessColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
-// WarningColor returns the theme's warning foreground color.
-//
-// Since: 2.3
-//
-// Deprecated: Use Color(theme.ColorNameWarning) instead.
-func WarningColor() color.Color {
-	return safeColorLookup(ColorNameWarning, currentVariant())
-}
+func WarningColor() color.Color { _ = "STUB: not implemented"; return *new(color.Color) }
 
 func safeColorLookup(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
-	col := Current().Color(n, v)
-	if col == nil {
-		fyne.LogError("Loaded theme returned nil color", nil)
-		return fallbackColor
-	}
-	return col
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }

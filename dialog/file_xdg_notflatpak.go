@@ -2,10 +2,6 @@
 
 package dialog
 
-func fileOpenOSOverride(_ *FileDialog) bool {
-	return false
-}
+func fileOpenOSOverride(_ *FileDialog) bool { _ = "STUB: not implemented"; return false }
 
-func fileSaveOSOverride(_ *FileDialog) bool {
-	return false
-}
+func fileSaveOSOverride(_ *FileDialog) bool { _ = "STUB: not implemented"; return false }

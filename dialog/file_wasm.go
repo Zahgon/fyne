@@ -6,28 +6,17 @@ import (
 	"fyne.io/fyne/v2"
 )
 
-func (f *fileDialog) loadPlaces() []fyne.CanvasObject {
-	return nil
-}
+func (f *fileDialog) loadPlaces() []fyne.CanvasObject { _ = "STUB: not implemented"; return nil }
 
-func isHidden(file fyne.URI) bool {
-	return false
-}
+func isHidden(file fyne.URI) bool { _ = "STUB: not implemented"; return false }
 
-func fileOpenOSOverride(f *FileDialog) bool {
-	// TODO #2737
-	return true
-}
+func fileOpenOSOverride(f *FileDialog) bool { _ = "STUB: not implemented"; return false }
 
-func fileSaveOSOverride(f *FileDialog) bool {
-	// TODO #2738
-	return true
-}
+func fileSaveOSOverride(f *FileDialog) bool { _ = "STUB: not implemented"; return false }
 
-func (f *fileDialog) getPlaces() []favoriteItem {
-	return []favoriteItem{}
-}
+func (f *fileDialog) getPlaces() []favoriteItem { _ = "STUB: not implemented"; return nil }
 
 func getFavoriteLocation(homeURI fyne.URI, name string) (fyne.URI, error) {
-	return nil, nil
+	_ = "STUB: not implemented"
+	return *new(fyne.URI), nil
 }

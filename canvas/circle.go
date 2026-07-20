@@ -2,99 +2,40 @@ package canvas
 
 import (
 	"image/color"
-	"math"
 
 	"fyne.io/fyne/v2"
 )
 
-// Declare conformity with CanvasObject interface
 var _ fyne.CanvasObject = (*Circle)(nil)
 
-// Circle describes a colored circle primitive in a Fyne canvas
 type Circle struct {
-	Position1 fyne.Position // The current top-left position of the Circle
-	Position2 fyne.Position // The current bottomright position of the Circle
-	Hidden    bool          // Is this circle currently hidden
+	Position1 fyne.Position
+	Position2 fyne.Position
+	Hidden    bool
 
-	FillColor   color.Color // The circle fill color
-	StrokeColor color.Color // The circle stroke color
-	StrokeWidth float32     // The stroke width of the circle
+	FillColor   color.Color
+	StrokeColor color.Color
+	StrokeWidth float32
 
-	// Support shadow configuration
-	//
-	// Since: 2.8
 	Shadow Shadow
 }
 
-// NewCircle returns a new Circle instance
-func NewCircle(color color.Color) *Circle {
-	return &Circle{FillColor: color}
-}
+func NewCircle(color color.Color) *Circle { _ = "STUB: not implemented"; return nil }
 
-// Hide will set this circle to not be visible
-func (c *Circle) Hide() {
-	c.Hidden = true
+func (c *Circle) Hide() { _ = "STUB: not implemented"; return }
 
-	repaint(c)
-}
+func (c *Circle) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-// MinSize for a Circle simply returns Size{1, 1} as there is no
-// explicit content
-func (c *Circle) MinSize() fyne.Size {
-	return fyne.NewSize(1, 1)
-}
+func (c *Circle) Move(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// Move the circle object to a new position, relative to its parent / canvas
-func (c *Circle) Move(pos fyne.Position) {
-	if c.Position1 == pos {
-		return
-	}
+func (c *Circle) Position() fyne.Position { _ = "STUB: not implemented"; return *new(fyne.Position) }
 
-	size := c.Size()
-	c.Position1 = pos
-	c.Position2 = c.Position1.Add(size)
+func (c *Circle) Refresh() { _ = "STUB: not implemented"; return }
 
-	repaint(c)
-}
+func (c *Circle) Resize(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-// Position gets the current top-left position of this circle object, relative to its parent / canvas
-func (c *Circle) Position() fyne.Position {
-	return c.Position1
-}
+func (c *Circle) Show() { _ = "STUB: not implemented"; return }
 
-// Refresh causes this object to be redrawn with its configured state.
-func (c *Circle) Refresh() {
-	Refresh(c)
-}
+func (c *Circle) Size() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-// Resize sets a new bottom-right position for the circle object
-// If it has a stroke width this will cause it to Refresh.
-func (c *Circle) Resize(size fyne.Size) {
-	if size == c.Size() {
-		return
-	}
-
-	c.Position2 = c.Position1.Add(size)
-
-	Refresh(c)
-}
-
-// Show will set this circle to be visible
-func (c *Circle) Show() {
-	c.Hidden = false
-
-	c.Refresh()
-}
-
-// Size returns the current size of bounding box for this circle object
-func (c *Circle) Size() fyne.Size {
-	return fyne.NewSize(
-		float32(math.Abs(float64(c.Position2.X)-float64(c.Position1.X))),
-		float32(math.Abs(float64(c.Position2.Y)-float64(c.Position1.Y))),
-	)
-}
-
-// Visible returns true if this circle is visible, false otherwise
-func (c *Circle) Visible() bool {
-	return !c.Hidden
-}
+func (c *Circle) Visible() bool { _ = "STUB: not implemented"; return false }

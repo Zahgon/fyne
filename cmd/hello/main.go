@@ -1,4 +1,3 @@
-// Package main loads a very basic Hello World graphical application.
 package main
 
 import (

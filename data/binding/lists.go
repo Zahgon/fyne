@@ -1,15 +1,9 @@
 package binding
 
 import (
-	"bytes"
-
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/storage"
 )
 
-// List supports binding a list of values with type T.
-//
-// Since: 2.7
 type List[T any] interface {
 	DataList
 
@@ -22,300 +16,123 @@ type List[T any] interface {
 	SetValue(index int, value T) error
 }
 
-// ExternalList supports binding a list of values, with type T, from an external variable.
-//
-// Since: 2.7
 type ExternalList[T any] interface {
 	List[T]
 
 	Reload() error
 }
 
-// NewList returns a bindable list of values with type T.
-//
-// Since: 2.7
-func NewList[T any](comparator func(T, T) bool) List[T] {
-	return newList[T](comparator)
-}
+func NewList[T any](comparator func(T, T) bool) List[T] { _ = "STUB: not implemented"; return nil }
 
-// BindList returns a bound list of values with type T, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.7
 func BindList[T any](v *[]T, comparator func(T, T) bool) ExternalList[T] {
-	return bindList(v, comparator)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-// DataList is the base interface for all bindable data lists.
-//
-// Since: 2.0
 type DataList interface {
 	DataItem
 	GetItem(index int) (DataItem, error)
 	Length() int
 }
 
-// BoolList supports binding a list of bool values.
-//
-// Since: 2.0
 type BoolList = List[bool]
 
-// ExternalBoolList supports binding a list of bool values from an external variable.
-//
-// Since: 2.0
 type ExternalBoolList = ExternalList[bool]
 
-// NewBoolList returns a bindable list of bool values.
-//
-// Since: 2.0
-func NewBoolList() List[bool] {
-	return newListComparable[bool]()
-}
+func NewBoolList() List[bool] { _ = "STUB: not implemented"; return nil }
 
-// BindBoolList returns a bound list of bool values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindBoolList(v *[]bool) ExternalList[bool] {
-	return bindListComparable(v)
-}
+func BindBoolList(v *[]bool) ExternalList[bool] { _ = "STUB: not implemented"; return nil }
 
-// BytesList supports binding a list of []byte values.
-//
-// Since: 2.2
 type BytesList = List[[]byte]
 
-// ExternalBytesList supports binding a list of []byte values from an external variable.
-//
-// Since: 2.2
 type ExternalBytesList = ExternalList[[]byte]
 
-// NewBytesList returns a bindable list of []byte values.
-//
-// Since: 2.2
-func NewBytesList() List[[]byte] {
-	return newList(bytes.Equal)
-}
+func NewBytesList() List[[]byte] { _ = "STUB: not implemented"; return nil }
 
-// BindBytesList returns a bound list of []byte values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.2
-func BindBytesList(v *[][]byte) ExternalList[[]byte] {
-	return bindList(v, bytes.Equal)
-}
+func BindBytesList(v *[][]byte) ExternalList[[]byte] { _ = "STUB: not implemented"; return nil }
 
-// FloatList supports binding a list of float64 values.
-//
-// Since: 2.0
 type FloatList = List[float64]
 
-// ExternalFloatList supports binding a list of float64 values from an external variable.
-//
-// Since: 2.0
 type ExternalFloatList = ExternalList[float64]
 
-// NewFloatList returns a bindable list of float64 values.
-//
-// Since: 2.0
-func NewFloatList() List[float64] {
-	return newListComparable[float64]()
-}
+func NewFloatList() List[float64] { _ = "STUB: not implemented"; return nil }
 
-// BindFloatList returns a bound list of float64 values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindFloatList(v *[]float64) ExternalList[float64] {
-	return bindListComparable(v)
-}
+func BindFloatList(v *[]float64) ExternalList[float64] { _ = "STUB: not implemented"; return nil }
 
-// IntList supports binding a list of int values.
-//
-// Since: 2.0
 type IntList = List[int]
 
-// ExternalIntList supports binding a list of int values from an external variable.
-//
-// Since: 2.0
 type ExternalIntList = ExternalList[int]
 
-// NewIntList returns a bindable list of int values.
-//
-// Since: 2.0
-func NewIntList() List[int] {
-	return newListComparable[int]()
-}
+func NewIntList() List[int] { _ = "STUB: not implemented"; return nil }
 
-// BindIntList returns a bound list of int values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindIntList(v *[]int) ExternalList[int] {
-	return bindListComparable(v)
-}
+func BindIntList(v *[]int) ExternalList[int] { _ = "STUB: not implemented"; return nil }
 
-// RuneList supports binding a list of rune values.
-//
-// Since: 2.0
 type RuneList = List[rune]
 
-// ExternalRuneList supports binding a list of rune values from an external variable.
-//
-// Since: 2.0
 type ExternalRuneList = ExternalList[rune]
 
-// NewRuneList returns a bindable list of rune values.
-//
-// Since: 2.0
-func NewRuneList() List[rune] {
-	return newListComparable[rune]()
-}
+func NewRuneList() List[rune] { _ = "STUB: not implemented"; return nil }
 
-// BindRuneList returns a bound list of rune values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindRuneList(v *[]rune) ExternalList[rune] {
-	return bindListComparable(v)
-}
+func BindRuneList(v *[]rune) ExternalList[rune] { _ = "STUB: not implemented"; return nil }
 
-// StringList supports binding a list of string values.
-//
-// Since: 2.0
 type StringList = List[string]
 
-// ExternalStringList supports binding a list of string values from an external variable.
-//
-// Since: 2.0
 type ExternalStringList = ExternalList[string]
 
-// NewStringList returns a bindable list of string values.
-//
-// Since: 2.0
-func NewStringList() List[string] {
-	return newListComparable[string]()
-}
+func NewStringList() List[string] { _ = "STUB: not implemented"; return nil }
 
-// BindStringList returns a bound list of string values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindStringList(v *[]string) ExternalList[string] {
-	return bindListComparable(v)
-}
+func BindStringList(v *[]string) ExternalList[string] { _ = "STUB: not implemented"; return nil }
 
-// UntypedList supports binding a list of any values.
-//
-// Since: 2.1
 type UntypedList = List[any]
 
-// ExternalUntypedList supports binding a list of any values from an external variable.
-//
-// Since: 2.1
 type ExternalUntypedList = ExternalList[any]
 
-// NewUntypedList returns a bindable list of any values.
-//
-// Since: 2.1
-func NewUntypedList() List[any] {
-	return newList(func(t1, t2 any) bool { return t1 == t2 })
-}
+func NewUntypedList() List[any] { _ = "STUB: not implemented"; return nil }
 
-// BindUntypedList returns a bound list of any values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.1
-func BindUntypedList(v *[]any) ExternalList[any] {
-	return bindList(v, func(t1, t2 any) bool { return t1 == t2 })
-}
+func BindUntypedList(v *[]any) ExternalList[any] { _ = "STUB: not implemented"; return nil }
 
-// URIList supports binding a list of fyne.URI values.
-//
-// Since: 2.1
 type URIList = List[fyne.URI]
 
-// ExternalURIList supports binding a list of fyne.URI values from an external variable.
-//
-// Since: 2.1
 type ExternalURIList = ExternalList[fyne.URI]
 
-// NewURIList returns a bindable list of fyne.URI values.
-//
-// Since: 2.1
-func NewURIList() List[fyne.URI] {
-	return newList(storage.EqualURI)
-}
+func NewURIList() List[fyne.URI] { _ = "STUB: not implemented"; return nil }
 
-// BindURIList returns a bound list of fyne.URI values, based on the contents of the passed slice.
-// If your code changes the content of the slice this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.1
-func BindURIList(v *[]fyne.URI) ExternalList[fyne.URI] {
-	return bindList(v, storage.EqualURI)
-}
+func BindURIList(v *[]fyne.URI) ExternalList[fyne.URI] { _ = "STUB: not implemented"; return nil }
 
 type listBase struct {
 	base
 	items []DataItem
 }
 
-// GetItem returns the DataItem at the specified index.
 func (b *listBase) GetItem(i int) (DataItem, error) {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
-
-	if i < 0 || i >= len(b.items) {
-		return nil, errOutOfBounds
-	}
-
-	return b.items[i], nil
+	_ = "STUB: not implemented"
+	return *new(DataItem), nil
 }
 
-// Length returns the number of items in this data list.
-func (b *listBase) Length() int {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
+func (b *listBase) Length() int { _ = "STUB: not implemented"; return 0 }
 
-	return len(b.items)
-}
+func (b *listBase) appendItem(i DataItem) { _ = "STUB: not implemented"; return }
 
-func (b *listBase) appendItem(i DataItem) {
-	b.items = append(b.items, i)
-}
-
-func (b *listBase) deleteItem(i int) {
-	b.items = append(b.items[:i], b.items[i+1:]...)
-}
+func (b *listBase) deleteItem(i int) { _ = "STUB: not implemented"; return }
 
 func newList[T any](comparator func(T, T) bool) *boundList[T] {
-	return &boundList[T]{val: new([]T), comparator: comparator}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func newListComparable[T comparable]() *boundList[T] {
-	return newList(func(t1, t2 T) bool { return t1 == t2 })
-}
+func newListComparable[T comparable]() *boundList[T] { _ = "STUB: not implemented"; return nil }
 
 func newExternalList[T any](v *[]T, comparator func(T, T) bool) *boundList[T] {
-	return &boundList[T]{val: v, comparator: comparator, updateExternal: true}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func bindList[T any](v *[]T, comparator func(T, T) bool) *boundList[T] {
-	if v == nil {
-		return newList(comparator)
-	}
-
-	l := newExternalList(v, comparator)
-	for i := range *v {
-		l.appendItem(bindListItem(v, i, l.updateExternal, comparator))
-	}
-
-	return l
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func bindListComparable[T comparable](v *[]T) *boundList[T] {
-	return bindList(v, func(t1, t2 T) bool { return t1 == t2 })
-}
+func bindListComparable[T comparable](v *[]T) *boundList[T] { _ = "STUB: not implemented"; return nil }
 
 type boundList[T any] struct {
 	listBase
@@ -327,187 +144,30 @@ type boundList[T any] struct {
 	parentListener func(int)
 }
 
-func (l *boundList[T]) Append(val T) error {
-	l.lock.Lock()
-	*l.val = append(*l.val, val)
+func (l *boundList[T]) Append(val T) error { _ = "STUB: not implemented"; return nil }
 
-	trigger, err := l.doReload()
-	l.lock.Unlock()
+func (l *boundList[T]) Get() ([]T, error) { _ = "STUB: not implemented"; return nil, nil }
 
-	if trigger {
-		l.trigger()
-	}
+func (l *boundList[T]) GetValue(i int) (T, error) { _ = "STUB: not implemented"; return *new(T), nil }
 
-	return err
-}
+func (l *boundList[T]) Prepend(val T) error { _ = "STUB: not implemented"; return nil }
 
-func (l *boundList[T]) Get() ([]T, error) {
-	l.lock.RLock()
-	defer l.lock.RUnlock()
+func (l *boundList[T]) Reload() error { _ = "STUB: not implemented"; return nil }
 
-	return *l.val, nil
-}
+func (l *boundList[T]) Remove(val T) error { _ = "STUB: not implemented"; return nil }
 
-func (l *boundList[T]) GetValue(i int) (T, error) {
-	l.lock.RLock()
-	defer l.lock.RUnlock()
-
-	if i < 0 || i >= l.Length() {
-		return *new(T), errOutOfBounds
-	}
-
-	return (*l.val)[i], nil
-}
-
-func (l *boundList[T]) Prepend(val T) error {
-	l.lock.Lock()
-	*l.val = append([]T{val}, *l.val...)
-
-	trigger, err := l.doReload()
-	l.lock.Unlock()
-
-	if trigger {
-		l.trigger()
-	}
-
-	return err
-}
-
-func (l *boundList[T]) Reload() error {
-	l.lock.Lock()
-	trigger, err := l.doReload()
-	l.lock.Unlock()
-
-	if trigger {
-		l.trigger()
-	}
-
-	return err
-}
-
-func (l *boundList[T]) Remove(val T) error {
-	l.lock.Lock()
-
-	v := *l.val
-	if len(v) == 0 {
-		l.lock.Unlock()
-		return nil
-	}
-	if l.comparator(v[0], val) {
-		*l.val = v[1:]
-	} else if l.comparator(v[len(v)-1], val) {
-		*l.val = v[:len(v)-1]
-	} else {
-		id := -1
-		for i, v := range v {
-			if l.comparator(v, val) {
-				id = i
-				break
-			}
-		}
-
-		if id == -1 {
-			l.lock.Unlock()
-			return nil
-		}
-		*l.val = append(v[:id], v[id+1:]...)
-	}
-
-	trigger, err := l.doReload()
-	l.lock.Unlock()
-
-	if trigger {
-		l.trigger()
-	}
-
-	return err
-}
-
-func (l *boundList[T]) Set(v []T) error {
-	l.lock.Lock()
-	*l.val = v
-	trigger, err := l.doReload()
-	l.lock.Unlock()
-
-	if trigger {
-		l.trigger()
-	}
-
-	return err
-}
+func (l *boundList[T]) Set(v []T) error { _ = "STUB: not implemented"; return nil }
 
 func (l *boundList[T]) doReload() (trigger bool, retErr error) {
-	oldLen := len(l.items)
-	newLen := len(*l.val)
-	if oldLen > newLen {
-		for i := oldLen - 1; i >= newLen; i-- {
-			l.deleteItem(i)
-		}
-		trigger = true
-	} else if oldLen < newLen {
-		for i := oldLen; i < newLen; i++ {
-			item := bindListItem(l.val, i, l.updateExternal, l.comparator)
-
-			if l.parentListener != nil {
-				index := i
-				item.AddListener(NewDataListener(func() {
-					l.parentListener(index)
-				}))
-			}
-
-			l.appendItem(item)
-		}
-		trigger = true
-	}
-
-	for i, item := range l.items {
-		if i > oldLen || i > newLen {
-			break
-		}
-
-		var err error
-		if l.updateExternal {
-			err = item.(*boundExternalListItem[T]).setIfChanged((*l.val)[i])
-		} else {
-			err = item.(*boundListItem[T]).doSet((*l.val)[i])
-		}
-		if err != nil {
-			retErr = err
-		}
-	}
-	return trigger, retErr
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
-func (l *boundList[T]) SetValue(i int, v T) error {
-	l.lock.RLock()
-	len := l.Length()
-	l.lock.RUnlock()
-
-	if i < 0 || i >= len {
-		return errOutOfBounds
-	}
-
-	l.lock.Lock()
-	(*l.val)[i] = v
-	l.lock.Unlock()
-
-	item, err := l.GetItem(i)
-	if err != nil {
-		return err
-	}
-	return item.(Item[T]).Set(v)
-}
+func (l *boundList[T]) SetValue(i int, v T) error { _ = "STUB: not implemented"; return nil }
 
 func bindListItem[T any](v *[]T, i int, external bool, comparator func(T, T) bool) Item[T] {
-	if external {
-		ret := &boundExternalListItem[T]{old: (*v)[i]}
-		ret.val = v
-		ret.index = i
-		ret.comparator = comparator
-		return ret
-	}
-
-	return &boundListItem[T]{val: v, index: i, comparator: comparator}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 type boundListItem[T any] struct {
@@ -518,29 +178,11 @@ type boundListItem[T any] struct {
 	index      int
 }
 
-func (b *boundListItem[T]) Get() (T, error) {
-	b.lock.Lock()
-	defer b.lock.Unlock()
+func (b *boundListItem[T]) Get() (T, error) { _ = "STUB: not implemented"; return *new(T), nil }
 
-	if b.index < 0 || b.index >= len(*b.val) {
-		return *new(T), errOutOfBounds
-	}
+func (b *boundListItem[T]) Set(val T) error { _ = "STUB: not implemented"; return nil }
 
-	return (*b.val)[b.index], nil
-}
-
-func (b *boundListItem[T]) Set(val T) error {
-	return b.doSet(val)
-}
-
-func (b *boundListItem[T]) doSet(val T) error {
-	b.lock.Lock()
-	(*b.val)[b.index] = val
-	b.lock.Unlock()
-
-	b.trigger()
-	return nil
-}
+func (b *boundListItem[T]) doSet(val T) error { _ = "STUB: not implemented"; return nil }
 
 type boundExternalListItem[T any] struct {
 	boundListItem[T]
@@ -548,16 +190,4 @@ type boundExternalListItem[T any] struct {
 	old T
 }
 
-func (b *boundExternalListItem[T]) setIfChanged(val T) error {
-	b.lock.Lock()
-	if b.comparator(val, b.old) {
-		b.lock.Unlock()
-		return nil
-	}
-	(*b.val)[b.index] = val
-	b.old = val
-
-	b.lock.Unlock()
-	b.trigger()
-	return nil
-}
+func (b *boundExternalListItem[T]) setIfChanged(val T) error { _ = "STUB: not implemented"; return nil }

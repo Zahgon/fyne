@@ -4,7 +4,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/driver/desktop"
-	"fyne.io/fyne/v2/theme"
 )
 
 var (
@@ -20,40 +19,19 @@ type passwordRevealer struct {
 	entry *Entry
 }
 
-func newPasswordRevealer(e *Entry) *passwordRevealer {
-	th := e.Theme()
-	pr := &passwordRevealer{
-		icon:  canvas.NewImageFromResource(th.Icon(theme.IconNameVisibilityOff)),
-		entry: e,
-	}
-	pr.ExtendBaseWidget(pr)
-	return pr
-}
+func newPasswordRevealer(e *Entry) *passwordRevealer { _ = "STUB: not implemented"; return nil }
 
 func (r *passwordRevealer) CreateRenderer() fyne.WidgetRenderer {
-	return &passwordRevealerRenderer{
-		WidgetRenderer: NewSimpleRenderer(r.icon),
-		icon:           r.icon,
-		entry:          r.entry,
-	}
+	_ = "STUB: not implemented"
+	return *new(fyne.WidgetRenderer)
 }
 
 func (r *passwordRevealer) Cursor() desktop.Cursor {
-	return desktop.DefaultCursor
+	_ = "STUB: not implemented"
+	return *new(desktop.Cursor)
 }
 
-func (r *passwordRevealer) Tapped(*fyne.PointEvent) {
-	if r.entry.Disabled() {
-		return
-	}
-
-	r.entry.setFieldsAndRefresh(func() {
-		r.entry.Password = !r.entry.Password
-	})
-	if c := fyne.CurrentApp().Driver().CanvasForObject(r); c != nil {
-		c.Focus(r.entry.super().(fyne.Focusable))
-	}
-}
+func (r *passwordRevealer) Tapped(*fyne.PointEvent) { _ = "STUB: not implemented"; return }
 
 var _ fyne.WidgetRenderer = (*passwordRevealerRenderer)(nil)
 
@@ -63,27 +41,11 @@ type passwordRevealerRenderer struct {
 	icon  *canvas.Image
 }
 
-func (r *passwordRevealerRenderer) Layout(size fyne.Size) {
-	iconSize := r.entry.Theme().Size(theme.SizeNameInlineIcon)
-	r.icon.Resize(fyne.NewSquareSize(iconSize))
-	r.icon.Move(fyne.NewPos((size.Width-iconSize)/2, (size.Height-iconSize)/2))
-}
+func (r *passwordRevealerRenderer) Layout(size fyne.Size) { _ = "STUB: not implemented"; return }
 
 func (r *passwordRevealerRenderer) MinSize() fyne.Size {
-	iconSize := r.entry.Theme().Size(theme.SizeNameInlineIcon)
-	return fyne.NewSquareSize(iconSize + r.entry.Theme().Size(theme.SizeNameInnerPadding)*2)
+	_ = "STUB: not implemented"
+	return *new(fyne.Size)
 }
 
-func (r *passwordRevealerRenderer) Refresh() {
-	th := r.entry.Theme()
-	if !r.entry.Password {
-		r.icon.Resource = th.Icon(theme.IconNameVisibility)
-	} else {
-		r.icon.Resource = th.Icon(theme.IconNameVisibilityOff)
-	}
-
-	if r.entry.Disabled() {
-		r.icon.Resource = theme.NewDisabledResource(r.icon.Resource)
-	}
-	r.icon.Refresh()
-}
+func (r *passwordRevealerRenderer) Refresh() { _ = "STUB: not implemented"; return }

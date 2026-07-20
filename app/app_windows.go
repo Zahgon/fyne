@@ -3,19 +3,10 @@
 package app
 
 import (
-	"errors"
-	"fmt"
 	"net/url"
-	"os"
-	"os/exec"
-	"path/filepath"
-	"strings"
-	"syscall"
 	"time"
 
 	"fyne.io/fyne/v2"
-	internalapp "fyne.io/fyne/v2/internal/app"
-	"fyne.io/fyne/v2/internal/scheduler"
 )
 
 const notificationTemplate = `$title = %q
@@ -56,106 +47,32 @@ foreach ($s in $notifier.GetScheduledToastNotifications()) {
     if ($s.Tag -eq $id) { $notifier.RemoveFromSchedule($s) }
 }`
 
-func (a *fyneApp) OpenURL(url *url.URL) error {
-	cmd := exec.Command("rundll32", "url.dll,FileProtocolHandler", url.String())
-	cmd.Stdin, cmd.Stdout, cmd.Stderr = os.Stdin, os.Stdout, os.Stderr
-	return cmd.Run()
-}
+func (a *fyneApp) OpenURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 var scriptNum = 0
 
-func (a *fyneApp) SendNotification(n *fyne.Notification) {
-	title := n.Title
-	content := n.Content
-	iconFilePath := a.cachedIconPath()
-	appID := a.notificationAppID()
-
-	script := fmt.Sprintf(notificationTemplate, title, content, iconFilePath, appID)
-	go runScript("notify", script)
-}
+func (a *fyneApp) SendNotification(n *fyne.Notification) { _ = "STUB: not implemented"; return }
 
 func (a *fyneApp) ScheduleNotification(n *fyne.Notification, when time.Time) (*fyne.ScheduledNotification, error) {
-	if !when.After(time.Now()) {
-		return nil, errors.New("scheduled delivery time must be in the future")
-	}
-
-	id, err := scheduler.NewID()
-	if err != nil {
-		return nil, err
-	}
-
-	title := n.Title
-	content := n.Content
-	iconFilePath := a.cachedIconPath()
-	delivery := when.UTC().Format(time.RFC3339)
-	appID := a.notificationAppID()
-
-	script := fmt.Sprintf(scheduledNotificationTemplate, title, content, iconFilePath, id, delivery, appID)
-	go runScript("schedule", script)
-	return fyne.NewScheduledNotification(id, n, when), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (a *fyneApp) CancelScheduledNotification(id string) error {
-	appID := a.notificationAppID()
-	script := fmt.Sprintf(cancelScheduledNotificationTemplate, id, appID)
-	go runScript("cancel", script)
+	_ = "STUB: not implemented"
 	return nil
 }
 
-func (a *fyneApp) notificationAppID() string {
-	appID := a.UniqueID()
-	if appID == "" || strings.Index(appID, "missing-id") == 0 {
-		appID = a.Metadata().Name
-	}
-	return appID
-}
+func (a *fyneApp) notificationAppID() string { _ = "STUB: not implemented"; return "" }
 
-// SetSystemTrayMenu creates a system tray item and attaches the specified menu.
-// By default, this will use the application icon.
-func (a *fyneApp) SetSystemTrayMenu(menu *fyne.Menu) {
-	a.Driver().(systrayDriver).SetSystemTrayMenu(menu)
-}
+func (a *fyneApp) SetSystemTrayMenu(menu *fyne.Menu) { _ = "STUB: not implemented"; return }
 
-// SetSystemTrayIcon sets a custom image for the system tray icon.
-// You should have previously called `SetSystemTrayMenu` to initialise the menu icon.
-func (a *fyneApp) SetSystemTrayIcon(icon fyne.Resource) {
-	a.Driver().(systrayDriver).SetSystemTrayIcon(icon)
-}
+func (a *fyneApp) SetSystemTrayIcon(icon fyne.Resource) { _ = "STUB: not implemented"; return }
 
-// SetSystemTrayWindow assigns a window to be shown with the system tray menu is tapped.
-// You should have previously called `SetSystemTrayMenu` to initialise the menu icon.
-func (a *fyneApp) SetSystemTrayWindow(w fyne.Window) {
-	a.Driver().(systrayDriver).SetSystemTrayWindow(w)
-}
+func (a *fyneApp) SetSystemTrayWindow(w fyne.Window) { _ = "STUB: not implemented"; return }
 
-func runScript(name, script string) {
-	scriptNum++
-	appID := fyne.CurrentApp().UniqueID()
-	fileName := fmt.Sprintf("fyne-%s-%s-%d.ps1", appID, name, scriptNum)
+func runScript(name, script string) { _ = "STUB: not implemented"; return }
 
-	tmpFilePath := filepath.Join(os.TempDir(), fileName)
-	err := os.WriteFile(tmpFilePath, []byte(script), 0o600)
-	if err != nil {
-		fyne.LogError("Could not write script to show notification", err)
-		return
-	}
-	defer os.Remove(tmpFilePath)
+func watchTheme(s *settings) { _ = "STUB: not implemented"; return }
 
-	launch := "(Get-Content -Encoding UTF8 -Path " + tmpFilePath + " -Raw) | Invoke-Expression"
-	cmd := exec.Command("PowerShell", "-ExecutionPolicy", "Bypass", launch)
-	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-	err = cmd.Run()
-	if err != nil {
-		fyne.LogError("Failed to launch windows notify script", err)
-	}
-}
-
-func watchTheme(s *settings) {
-	go internalapp.WatchTheme(func() {
-		fyne.Do(s.setupTheme)
-	})
-}
-
-func (a *fyneApp) registerRepositories() {
-	// no-op
-}
+func (a *fyneApp) registerRepositories() { _ = "STUB: not implemented"; return }

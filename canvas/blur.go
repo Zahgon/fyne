@@ -2,58 +2,22 @@ package canvas
 
 import "fyne.io/fyne/v2"
 
-// Declare conformity with CanvasObject interface
 var _ fyne.CanvasObject = (*Blur)(nil)
 
-// Blur creates a rectangular blur region on the output.
-// All objects drawn under this will be blurred, any above will not be affected.
-//
-// Since: 2.8
 type Blur struct {
 	baseObject
 
-	// Radius refers to how far from a point should be used to calculate the blur.
-	// It must be greater than 0 but no more than 50.
 	Radius float32
 
-	// Radius used to round the corners of the blur region.
 	CornerRadius float32
 }
 
-// Hide will set this blur to not be visible
-func (b *Blur) Hide() {
-	b.baseObject.Hide()
+func (b *Blur) Hide() { _ = "STUB: not implemented"; return }
 
-	repaint(b)
-}
+func (b *Blur) Move(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// Move the blur to a new position, relative to its parent / canvas
-func (b *Blur) Move(pos fyne.Position) {
-	if b.Position() == pos {
-		return
-	}
-	b.baseObject.Move(pos)
+func (b *Blur) Refresh() { _ = "STUB: not implemented"; return }
 
-	repaint(b)
-}
+func (b *Blur) Resize(s fyne.Size) { _ = "STUB: not implemented"; return }
 
-// Refresh causes this blur to be redrawn with its configured state.
-func (b *Blur) Refresh() {
-	Refresh(b)
-}
-
-// Resize on a blur updates the new size of this object.
-func (b *Blur) Resize(s fyne.Size) {
-	if s == b.Size() {
-		return
-	}
-
-	b.baseObject.Resize(s)
-}
-
-// NewBlur returns a new Blur instance
-func NewBlur(radius float32) *Blur {
-	return &Blur{
-		Radius: radius,
-	}
-}
+func NewBlur(radius float32) *Blur { _ = "STUB: not implemented"; return nil }

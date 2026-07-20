@@ -10,148 +10,52 @@ var (
 	_ fyne.Focusable = (*PopUpMenu)(nil)
 )
 
-// PopUpMenu is a Menu which displays itself in an OverlayContainer.
 type PopUpMenu struct {
 	*Menu
 	canvas  fyne.Canvas
 	overlay *widget.OverlayContainer
 }
 
-// NewPopUpMenu creates a new, reusable popup menu. You can show it using ShowAtPosition.
-//
-// Since: 2.0
-func NewPopUpMenu(menu *fyne.Menu, c fyne.Canvas) *PopUpMenu {
-	if c == nil {
-		return nil
-	}
-	m := &Menu{}
-	m.setMenu(menu)
-	p := &PopUpMenu{Menu: m, canvas: c}
-	p.ExtendBaseWidget(p)
-	p.Resize(p.MinSize())
-	p.customSized = true
+func NewPopUpMenu(menu *fyne.Menu, c fyne.Canvas) *PopUpMenu { _ = "STUB: not implemented"; return nil }
 
-	p.Move(fyne.NewPos(10, 10)) //revive:disable-line:add-constant // non-zero pos to get manual overlay, fixed on show
-	o := widget.NewOverlayContainer(p, c, p.Dismiss)
-	o.Resize(o.MinSize())
-	p.overlay = o
-	p.OnDismiss = func() {
-		p.Hide()
-	}
-	return p
-}
+//revive:disable-line:add-constant // non-zero pos to get manual overlay, fixed on show
 
-// ShowPopUpMenuAtPosition creates a PopUp menu populated with items from the passed menu structure.
-// It will automatically be positioned at the provided location and shown as an overlay on the specified canvas.
 func ShowPopUpMenuAtPosition(menu *fyne.Menu, c fyne.Canvas, pos fyne.Position) {
-	m := NewPopUpMenu(menu, c)
-	if m == nil {
-		return
-	}
-	m.ShowAtPosition(pos)
+	_ = "STUB: not implemented"
+	return
 }
 
-// ShowPopUpMenuAtRelativePosition creates a PopUp menu populated with menu items from the passed menu structure.
-// It will automatically be positioned at the given position relative to stated object and shown as an overlay on the specified canvas.
-//
-// Since 2.4
 func ShowPopUpMenuAtRelativePosition(menu *fyne.Menu, c fyne.Canvas, rel fyne.Position, to fyne.CanvasObject) {
-	withRelativePosition(rel, to, func(pos fyne.Position) {
-		ShowPopUpMenuAtPosition(menu, c, pos)
-	})
+	_ = "STUB: not implemented"
+	return
 }
 
-// FocusGained is triggered when the object gained focus. For the pop-up menu it does nothing.
-func (p *PopUpMenu) FocusGained() {}
+func (p *PopUpMenu) FocusGained() { _ = "STUB: not implemented"; return }
 
-// FocusLost is triggered when the object lost focus. For the pop-up menu it does nothing.
-func (p *PopUpMenu) FocusLost() {}
+func (p *PopUpMenu) FocusLost() { _ = "STUB: not implemented"; return }
 
-// Hide hides the pop-up menu.
-func (p *PopUpMenu) Hide() {
-	p.overlay.Hide()
-	p.Menu.Hide()
-}
+func (p *PopUpMenu) Hide() { _ = "STUB: not implemented"; return }
 
-// Move moves the pop-up menu.
-// The position is absolute because pop-up menus are shown in an overlay which covers the whole canvas.
-func (p *PopUpMenu) Move(pos fyne.Position) {
-	p.BaseWidget.Move(p.adjustedPosition(pos, p.Size()))
-}
+func (p *PopUpMenu) Move(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// Resize changes the size of the pop-up menu.
-func (p *PopUpMenu) Resize(size fyne.Size) {
-	p.BaseWidget.Move(p.adjustedPosition(p.Position(), size))
-	p.Menu.Resize(size)
-}
+func (p *PopUpMenu) Resize(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-// SetCanvas allows a popup menu to be re-used on a different canvas.
-//
-// Since: 2.8
-func (p *PopUpMenu) SetCanvas(c fyne.Canvas) {
-	p.canvas = c
-	p.overlay.SetCanvas(c)
-}
+func (p *PopUpMenu) SetCanvas(c fyne.Canvas) { _ = "STUB: not implemented"; return }
 
-// Show makes the pop-up menu visible.
-func (p *PopUpMenu) Show() {
-	p.Refresh()
-	p.overlay.Show()
-	p.Menu.Show()
-	if !fyne.CurrentDevice().IsMobile() {
-		p.canvas.Focus(p)
-	}
-}
+func (p *PopUpMenu) Show() { _ = "STUB: not implemented"; return }
 
-// ShowAtPosition shows the pop-up menu at the specified position.
-func (p *PopUpMenu) ShowAtPosition(pos fyne.Position) {
-	p.Move(pos)
-	p.Show()
-}
+func (p *PopUpMenu) ShowAtPosition(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// ShowAtRelativePosition shows the pop-up menu at the position relative to given object.
-//
-// Since 2.4
 func (p *PopUpMenu) ShowAtRelativePosition(rel fyne.Position, to fyne.CanvasObject) {
-	withRelativePosition(rel, to, p.ShowAtPosition)
+	_ = "STUB: not implemented"
+	return
 }
 
-// TypedKey handles key events. It allows keyboard control of the pop-up menu.
-func (p *PopUpMenu) TypedKey(e *fyne.KeyEvent) {
-	switch e.Name {
-	case fyne.KeyDown:
-		p.ActivateNext()
-	case fyne.KeyEnter, fyne.KeyReturn, fyne.KeySpace:
-		p.TriggerLast()
-	case fyne.KeyEscape:
-		p.Dismiss()
-	case fyne.KeyLeft:
-		p.DeactivateLastSubmenu()
-	case fyne.KeyRight:
-		p.ActivateLastSubmenu()
-	case fyne.KeyUp:
-		p.ActivatePrevious()
-	}
-}
+func (p *PopUpMenu) TypedKey(e *fyne.KeyEvent) { _ = "STUB: not implemented"; return }
 
-// TypedRune handles text events. For pop-up menus this does nothing.
-func (p *PopUpMenu) TypedRune(rune) {}
+func (p *PopUpMenu) TypedRune(rune) { _ = "STUB: not implemented"; return }
 
 func (p *PopUpMenu) adjustedPosition(pos fyne.Position, size fyne.Size) fyne.Position {
-	x := pos.X
-	y := pos.Y
-	_, areaSize := p.canvas.InteractiveArea()
-	if x+size.Width > areaSize.Width {
-		x = areaSize.Width - size.Width
-		if x < 0 {
-			x = 0 // TODO here we may need a scroller as it's wider than our canvas
-		}
-	}
-	if y+size.Height > areaSize.Height {
-		y = areaSize.Height - size.Height
-		if y < 0 {
-			y = 0 // TODO here we may need a scroller as it's longer than our canvas
-		}
-	}
-	return fyne.NewPos(x, y)
+	_ = "STUB: not implemented"
+	return *new(fyne.Position)
 }

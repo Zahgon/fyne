@@ -1,36 +1,24 @@
 package test
 
 import (
-	"runtime"
-
 	"fyne.io/fyne/v2"
 )
 
 type device struct{}
 
-// Declare conformity with Device
 var _ fyne.Device = (*device)(nil)
 
 func (d *device) Orientation() fyne.DeviceOrientation {
-	return fyne.OrientationVertical
+	_ = "STUB: not implemented"
+	return *new(fyne.DeviceOrientation)
 }
 
-func (d *device) HasKeyboard() bool {
-	return false
-}
+func (d *device) HasKeyboard() bool { _ = "STUB: not implemented"; return false }
 
-func (d *device) SystemScale() float32 {
-	return d.SystemScaleForWindow(nil)
-}
+func (d *device) SystemScale() float32 { _ = "STUB: not implemented"; return 0 }
 
-func (d *device) SystemScaleForWindow(fyne.Window) float32 {
-	return 1
-}
+func (d *device) SystemScaleForWindow(fyne.Window) float32 { _ = "STUB: not implemented"; return 0 }
 
-func (d *device) Locale() fyne.Locale {
-	return "en"
-}
+func (d *device) Locale() fyne.Locale { _ = "STUB: not implemented"; return *new(fyne.Locale) }
 
-func (*device) IsBrowser() bool {
-	return runtime.GOARCH == "js" || runtime.GOOS == "js"
-}
+func (*device) IsBrowser() bool { _ = "STUB: not implemented"; return false }

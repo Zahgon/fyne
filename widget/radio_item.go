@@ -1,13 +1,10 @@
 package widget
 
 import (
-	"image/color"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/driver/desktop"
 	"fyne.io/fyne/v2/internal/widget"
-	"fyne.io/fyne/v2/theme"
 )
 
 var (
@@ -18,12 +15,10 @@ var (
 )
 
 func newRadioItem(label string, onTap func(*radioItem)) *radioItem {
-	i := &radioItem{Label: label, onTap: onTap}
-	i.ExtendBaseWidget(i)
-	return i
+	_ = "STUB: not implemented"
+	return nil
 }
 
-// radioItem is a single radio item to be used by RadioGroup.
 type radioItem struct {
 	DisableableWidget
 
@@ -35,88 +30,30 @@ type radioItem struct {
 	onTap   func(item *radioItem)
 }
 
-// CreateRenderer is a private method to Fyne which links this widget to its renderer.
 func (i *radioItem) CreateRenderer() fyne.WidgetRenderer {
-	txt := canvas.Text{Alignment: fyne.TextAlignLeading}
-	txt.TextSize = i.Theme().Size(theme.SizeNameText)
-	r := &radioItemRenderer{item: i, label: &txt}
-	r.SetObjects([]fyne.CanvasObject{&r.focusIndicator, &r.icon, &r.over, &txt})
-	r.update()
-	return r
+	_ = "STUB: not implemented"
+	return *new(fyne.WidgetRenderer)
 }
 
-// FocusGained is called when this item gained the focus.
-func (i *radioItem) FocusGained() {
-	i.focused = true
-	i.Refresh()
-}
+func (i *radioItem) FocusGained() { _ = "STUB: not implemented"; return }
 
-// FocusLost is called when this item lost the focus.
-func (i *radioItem) FocusLost() {
-	i.focused = false
-	i.Refresh()
-}
+func (i *radioItem) FocusLost() { _ = "STUB: not implemented"; return }
 
-// MouseIn is called when a desktop pointer enters the widget.
-func (i *radioItem) MouseIn(_ *desktop.MouseEvent) {
-	if i.Disabled() {
-		return
-	}
+func (i *radioItem) MouseIn(_ *desktop.MouseEvent) { _ = "STUB: not implemented"; return }
 
-	i.hovered = true
-	i.Refresh()
-}
+func (i *radioItem) MouseMoved(_ *desktop.MouseEvent) { _ = "STUB: not implemented"; return }
 
-// MouseMoved is called when a desktop pointer hovers over the widget.
-func (i *radioItem) MouseMoved(_ *desktop.MouseEvent) {
-}
+func (i *radioItem) MouseOut() { _ = "STUB: not implemented"; return }
 
-// MouseOut is called when a desktop pointer exits the widget
-func (i *radioItem) MouseOut() {
-	if i.Disabled() {
-		return
-	}
+func (i *radioItem) SetSelected(selected bool) { _ = "STUB: not implemented"; return }
 
-	i.hovered = false
-	i.Refresh()
-}
+func (i *radioItem) Tapped(_ *fyne.PointEvent) { _ = "STUB: not implemented"; return }
 
-// SetSelected sets whether this radio item is selected or not.
-func (i *radioItem) SetSelected(selected bool) {
-	if i.Disabled() || i.Selected == selected {
-		return
-	}
+func (i *radioItem) TypedKey(_ *fyne.KeyEvent) { _ = "STUB: not implemented"; return }
 
-	i.Selected = selected
-	i.Refresh()
-}
+func (i *radioItem) TypedRune(r rune) { _ = "STUB: not implemented"; return }
 
-// Tapped is called when a pointer tapped event is captured and triggers any change handler
-func (i *radioItem) Tapped(_ *fyne.PointEvent) {
-	if !i.focused {
-		focusIfNotMobile(i.super())
-	}
-	i.toggle()
-}
-
-// TypedKey is called when this item receives a key event.
-func (i *radioItem) TypedKey(_ *fyne.KeyEvent) {
-}
-
-// TypedRune is called when this item receives a char event.
-func (i *radioItem) TypedRune(r rune) {
-	if r == ' ' {
-		i.toggle()
-	}
-}
-
-func (i *radioItem) toggle() {
-	if i.Disabled() || i.onTap == nil {
-		return
-	}
-
-	i.onTap(i)
-}
+func (i *radioItem) toggle() { _ = "STUB: not implemented"; return }
 
 type radioItemRenderer struct {
 	widget.BaseRenderer
@@ -127,81 +64,10 @@ type radioItemRenderer struct {
 	label          *canvas.Text
 }
 
-func (r *radioItemRenderer) Layout(size fyne.Size) {
-	th := r.item.Theme()
-	innerPadding := th.Size(theme.SizeNameInnerPadding)
-	borderSize := th.Size(theme.SizeNameInputBorder)
-	iconInlineSize := th.Size(theme.SizeNameInlineIcon)
+func (r *radioItemRenderer) Layout(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-	focusIndicatorSize := fyne.NewSquareSize(iconInlineSize + innerPadding)
-	r.focusIndicator.Resize(focusIndicatorSize)
-	r.focusIndicator.Move(fyne.NewPos(borderSize, (size.Height-focusIndicatorSize.Height)/2))
+func (r *radioItemRenderer) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-	labelSize := fyne.NewSize(size.Width, size.Height)
-	r.label.Resize(labelSize)
-	r.label.Move(fyne.NewPos(focusIndicatorSize.Width+th.Size(theme.SizeNamePadding), 0))
+func (r *radioItemRenderer) Refresh() { _ = "STUB: not implemented"; return }
 
-	iconPos := fyne.NewPos(innerPadding/2+borderSize, (size.Height-iconInlineSize)/2)
-	iconSize := fyne.NewSquareSize(iconInlineSize)
-	r.icon.Resize(iconSize)
-	r.icon.Move(iconPos)
-	r.over.Resize(iconSize)
-	r.over.Move(iconPos)
-}
-
-func (r *radioItemRenderer) MinSize() fyne.Size {
-	th := r.item.Theme()
-	inPad := th.Size(theme.SizeNameInnerPadding) * 2
-
-	return r.label.MinSize().
-		AddWidthHeight(inPad+th.Size(theme.SizeNameInlineIcon)+th.Size(theme.SizeNamePadding), inPad)
-}
-
-func (r *radioItemRenderer) Refresh() {
-	r.update()
-	canvas.Refresh(r.item.super())
-}
-
-func (r *radioItemRenderer) update() {
-	th := r.item.Theme()
-	v := fyne.CurrentApp().Settings().ThemeVariant()
-
-	r.label.Text = r.item.Label
-	r.label.TextSize = th.Size(theme.SizeNameText)
-	if r.item.Disabled() {
-		r.label.Color = th.Color(theme.ColorNameDisabled, v)
-	} else {
-		r.label.Color = th.Color(theme.ColorNameForeground, v)
-	}
-
-	out := theme.NewThemedResource(th.Icon(theme.IconNameRadioButton))
-	out.ColorName = theme.ColorNameInputBorder
-	in := theme.NewThemedResource(th.Icon(theme.IconNameRadioButtonFill))
-	in.ColorName = theme.ColorNameInputBackground
-	if r.item.Selected {
-		in.ColorName = theme.ColorNamePrimary
-		out.ColorName = theme.ColorNameForeground
-	}
-	if r.item.Disabled() {
-		if r.item.Selected {
-			in.ColorName = theme.ColorNameDisabled
-		} else {
-			in.ColorName = theme.ColorNameBackground
-		}
-		out.ColorName = theme.ColorNameDisabled
-	}
-	r.icon.Resource = in
-	r.icon.Refresh()
-	r.over.Resource = out
-	r.over.Refresh()
-
-	if r.item.Disabled() {
-		r.focusIndicator.FillColor = color.Transparent
-	} else if r.item.focused {
-		r.focusIndicator.FillColor = th.Color(theme.ColorNameFocus, v)
-	} else if r.item.hovered {
-		r.focusIndicator.FillColor = th.Color(theme.ColorNameHover, v)
-	} else {
-		r.focusIndicator.FillColor = color.Transparent
-	}
-}
+func (r *radioItemRenderer) update() { _ = "STUB: not implemented"; return }

@@ -15,47 +15,20 @@ import "C"
 
 import (
 	"net/url"
-	"os"
-	"os/exec"
 
 	"fyne.io/fyne/v2"
 )
 
-func (a *fyneApp) OpenURL(url *url.URL) error {
-	cmd := exec.Command("open", url.String())
-	cmd.Stdin, cmd.Stdout, cmd.Stderr = os.Stdin, os.Stdout, os.Stderr
-	return cmd.Run()
-}
+func (a *fyneApp) OpenURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
-// SetSystemTrayIcon sets a custom image for the system tray icon.
-// You should have previously called `SetSystemTrayMenu` to initialise the menu icon.
-func (a *fyneApp) SetSystemTrayIcon(icon fyne.Resource) {
-	a.Driver().(systrayDriver).SetSystemTrayIcon(icon)
-}
+func (a *fyneApp) SetSystemTrayIcon(icon fyne.Resource) { _ = "STUB: not implemented"; return }
 
-// SetSystemTrayMenu creates a system tray item and attaches the specified menu.
-// By default, this will use the application icon.
-func (a *fyneApp) SetSystemTrayMenu(menu *fyne.Menu) {
-	if desk, ok := a.Driver().(systrayDriver); ok {
-		desk.SetSystemTrayMenu(menu)
-	}
-}
+func (a *fyneApp) SetSystemTrayMenu(menu *fyne.Menu) { _ = "STUB: not implemented"; return }
 
-// SetSystemTrayWindow assigns a window to be shown with the system tray menu is tapped.
-// You should have previously called `SetSystemTrayMenu` to initialise the menu icon.
-func (a *fyneApp) SetSystemTrayWindow(w fyne.Window) {
-	a.Driver().(systrayDriver).SetSystemTrayWindow(w)
-}
+func (a *fyneApp) SetSystemTrayWindow(w fyne.Window) { _ = "STUB: not implemented"; return }
 
-//export themeChanged
-func themeChanged() {
-	fyne.CurrentApp().Settings().(*settings).setupTheme()
-}
+func themeChanged() { _ = "STUB: not implemented"; return }
 
-func watchTheme(_ *settings) {
-	C.watchTheme()
-}
+func watchTheme(_ *settings) { _ = "STUB: not implemented"; return }
 
-func (a *fyneApp) registerRepositories() {
-	// no-op
-}
+func (a *fyneApp) registerRepositories() { _ = "STUB: not implemented"; return }

@@ -1,16 +1,13 @@
 package widget
 
 import (
-	"strings"
-
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/lang"
 )
 
 type weekday int
 
 const (
-	monday weekday = iota // default
+	monday weekday = iota
 	sunday
 	saturday
 )
@@ -81,28 +78,11 @@ var localeSettings = map[string]localeSetting{
 	},
 }
 
-func getLocaleDateFormat() string {
-	s := lookupLocaleSetting(lang.SystemLocale())
-	if d := s.dateFormat; d != "" {
-		return d
-	}
-	return defaultDateFormat
-}
+func getLocaleDateFormat() string { _ = "STUB: not implemented"; return "" }
 
-func getLocaleWeekStart() weekday {
-	return lookupLocaleSetting(lang.SystemLocale()).weekStartDay
-}
+func getLocaleWeekStart() weekday { _ = "STUB: not implemented"; return *new(weekday) }
 
 func lookupLocaleSetting(l fyne.Locale) localeSetting {
-	region := ""
-	lang := l.LanguageString()
-	if pos := strings.Index(lang, "-"); pos != -1 {
-		region = strings.Split(lang, "-")[1]
-	}
-
-	if setting, ok := localeSettings[region]; ok {
-		return setting
-	}
-
-	return localeSettings[""]
+	_ = "STUB: not implemented"
+	return *new(localeSetting)
 }

@@ -15,13 +15,6 @@ import "C"
 
 import (
 	"net/url"
-	"unsafe"
 )
 
-func (a *fyneApp) OpenURL(url *url.URL) error {
-	urlStr := C.CString(url.String())
-	C.openURL(urlStr)
-	C.free(unsafe.Pointer(urlStr))
-
-	return nil
-}
+func (a *fyneApp) OpenURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }

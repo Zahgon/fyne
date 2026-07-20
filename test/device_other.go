@@ -2,6 +2,4 @@
 
 package test
 
-func (d *device) IsMobile() bool {
-	return false
-}
+func (d *device) IsMobile() bool { _ = "STUB: not implemented"; return false }

@@ -2,81 +2,30 @@ package widget
 
 import (
 	"image/color"
-	"time"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
-	fynecolor "fyne.io/fyne/v2/internal/color"
-	"fyne.io/fyne/v2/theme"
 )
 
 var _ fyne.Widget = (*Activity)(nil)
 
-// Activity is used to indicate that something is happening that should be waited for,
-// or is in the background (depending on usage).
-//
-// Since: 2.5
 type Activity struct {
 	BaseWidget
 
 	started bool
 }
 
-// NewActivity returns a widget for indicating activity
-//
-// Since: 2.5
-func NewActivity() *Activity {
-	a := &Activity{}
-	a.ExtendBaseWidget(a)
-	return a
-}
+func NewActivity() *Activity { _ = "STUB: not implemented"; return nil }
 
-func (a *Activity) MinSize() fyne.Size {
-	a.ExtendBaseWidget(a)
-	return a.BaseWidget.MinSize()
-}
+func (a *Activity) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-// Start the activity indicator animation
-func (a *Activity) Start() {
-	if a.started {
-		return // already started
-	}
+func (a *Activity) Start() { _ = "STUB: not implemented"; return }
 
-	a.started = true
-
-	a.Refresh()
-}
-
-// Stop the activity indicator animation
-func (a *Activity) Stop() {
-	if !a.started {
-		return // already stopped
-	}
-
-	a.started = false
-
-	a.Refresh()
-}
+func (a *Activity) Stop() { _ = "STUB: not implemented"; return }
 
 func (a *Activity) CreateRenderer() fyne.WidgetRenderer {
-	dots := make([]fyne.CanvasObject, 3)
-	v := fyne.CurrentApp().Settings().ThemeVariant()
-	for i := range dots {
-		dots[i] = canvas.NewCircle(a.Theme().Color(theme.ColorNameForeground, v))
-	}
-	r := &activityRenderer{dots: dots, parent: a}
-	r.anim = &fyne.Animation{
-		Duration:    time.Second * 2,
-		RepeatCount: fyne.AnimationRepeatForever,
-		Tick:        r.animate,
-	}
-	r.updateColor()
-
-	if a.started {
-		r.start()
-	}
-
-	return r
+	_ = "STUB: not implemented"
+	return *new(fyne.WidgetRenderer)
 }
 
 var _ fyne.WidgetRenderer = (*activityRenderer)(nil)
@@ -92,135 +41,31 @@ type activityRenderer struct {
 	wasStarted bool
 }
 
-func (a *activityRenderer) Destroy() {
-	a.parent.started = false
-	a.stop()
-}
+func (a *activityRenderer) Destroy() { _ = "STUB: not implemented"; return }
 
-func (a *activityRenderer) Layout(size fyne.Size) {
-	a.maxRad = fyne.Min(size.Width, size.Height) / 2
-	a.bound = size
+func (a *activityRenderer) Layout(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-	if a.parent.started && !fyne.CurrentApp().Settings().ShowAnimations() {
-		a.drawStaticEllipsis()
-	}
-}
+func (a *activityRenderer) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-func (a *activityRenderer) MinSize() fyne.Size {
-	return fyne.NewSquareSize(a.parent.Theme().Size(theme.SizeNameInlineIcon))
-}
+func (a *activityRenderer) Objects() []fyne.CanvasObject { _ = "STUB: not implemented"; return nil }
 
-func (a *activityRenderer) Objects() []fyne.CanvasObject {
-	return a.dots
-}
+func (a *activityRenderer) Refresh() { _ = "STUB: not implemented"; return }
 
-func (a *activityRenderer) Refresh() {
-	if a.parent.started {
-		if !a.wasStarted {
-			a.start()
-		}
-	} else if a.wasStarted {
-		a.stop()
-	}
-
-	a.updateColor()
-}
-
-func (a *activityRenderer) animate(done float32) {
-	off := done * 2
-	if off > 1 {
-		off = 2 - off
-	}
-
-	off1 := (done + 0.25) * 2
-	if done >= 0.75 {
-		off1 = (done - 0.75) * 2
-	}
-	if off1 > 1 {
-		off1 = 2 - off1
-	}
-
-	off2 := (done + 0.75) * 2
-	if done >= 0.25 {
-		off2 = (done - 0.25) * 2
-	}
-	if off2 > 1 {
-		off2 = 2 - off2
-	}
-
-	a.scaleDot(a.dots[0].(*canvas.Circle), off)
-	a.scaleDot(a.dots[1].(*canvas.Circle), off1)
-	a.scaleDot(a.dots[2].(*canvas.Circle), off2)
-}
+func (a *activityRenderer) animate(done float32) { _ = "STUB: not implemented"; return }
 
 func (a *activityRenderer) scaleDot(dot *canvas.Circle, off float32) {
-	rad := a.maxRad - a.maxRad*off/1.2 //revive:disable-line:add-constant
-	mid := fyne.NewPos(a.bound.Width/2, a.bound.Height/2)
-
-	dot.Move(mid.Subtract(fyne.NewSquareOffsetPos(rad)))
-	dot.Resize(fyne.NewSquareSize(rad * 2))
-
-	alpha := uint8(float32(a.maxCol.A) * off)
-	dot.FillColor = color.NRGBA{R: a.maxCol.R, G: a.maxCol.G, B: a.maxCol.B, A: alpha}
-	dot.Refresh()
+	_ = "STUB: not implemented"
+	return
 }
 
-func (a *activityRenderer) start() {
-	a.wasStarted = true
-	if !fyne.CurrentApp().Settings().ShowAnimations() {
-		a.drawStaticEllipsis()
-		return
-	}
-	a.anim.Start()
-}
+//revive:disable-line:add-constant
 
-func (a *activityRenderer) stop() {
-	a.wasStarted = false
-	a.anim.Stop()
-	if !fyne.CurrentApp().Settings().ShowAnimations() {
-		a.hideDots()
-	}
-}
+func (a *activityRenderer) start() { _ = "STUB: not implemented"; return }
 
-// drawStaticEllipsis places the three dots in a horizontal row, like an
-// ellipsis. Used when animations are disabled so the widget still indicates
-// something is happening without any motion.
-func (a *activityRenderer) drawStaticEllipsis() {
-	th := a.parent.Theme()
-	innerPad := th.Size(theme.SizeNameInnerPadding)
-	d := fyne.Min(a.bound.Width/4, a.bound.Height)
-	if d > th.Size(theme.SizeNameInlineIcon)/2 {
-		d -= innerPad
-	}
-	if d <= 0 {
-		a.hideDots()
-		return
-	}
-	radius := d / 2
-	totalW := 4 * d
-	startX := (a.bound.Width - totalW) / 2
-	cy := a.bound.Height / 2
-	fill := color.NRGBA{R: a.maxCol.R, G: a.maxCol.G, B: a.maxCol.B, A: a.maxCol.A}
-	for i, obj := range a.dots {
-		dot := obj.(*canvas.Circle)
-		cx := startX + radius + float32(i)*3*radius
-		dot.Move(fyne.NewPos(cx-radius, cy-radius))
-		dot.Resize(fyne.NewSquareSize(d))
-		dot.FillColor = fill
-		dot.Refresh()
-	}
-}
+func (a *activityRenderer) stop() { _ = "STUB: not implemented"; return }
 
-func (a *activityRenderer) hideDots() {
-	for _, obj := range a.dots {
-		dot := obj.(*canvas.Circle)
-		dot.Resize(fyne.NewSquareSize(0))
-		dot.Refresh()
-	}
-}
+func (a *activityRenderer) drawStaticEllipsis() { _ = "STUB: not implemented"; return }
 
-func (a *activityRenderer) updateColor() {
-	v := fyne.CurrentApp().Settings().ThemeVariant()
-	rr, gg, bb, aa := fynecolor.ToNRGBA(a.parent.Theme().Color(theme.ColorNameForeground, v))
-	a.maxCol = color.NRGBA{R: rr, G: gg, B: bb, A: aa}
-}
+func (a *activityRenderer) hideDots() { _ = "STUB: not implemented"; return }
+
+func (a *activityRenderer) updateColor() { _ = "STUB: not implemented"; return }

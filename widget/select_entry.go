@@ -2,7 +2,6 @@ package widget
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/theme"
 )
 
 var (
@@ -10,7 +9,6 @@ var (
 	_ fyne.Disableable = (*SelectEntry)(nil)
 )
 
-// SelectEntry is an input field which supports selecting from a fixed set of options.
 type SelectEntry struct {
 	Entry
 	dropDown *fyne.Menu
@@ -18,96 +16,28 @@ type SelectEntry struct {
 	options  []string
 }
 
-// NewSelectEntry creates a SelectEntry.
-func NewSelectEntry(options []string) *SelectEntry {
-	e := &SelectEntry{options: options}
-	e.ExtendBaseWidget(e)
-	e.Wrapping = fyne.TextWrap(fyne.TextTruncateClip)
-	return e
-}
+func NewSelectEntry(options []string) *SelectEntry { _ = "STUB: not implemented"; return nil }
 
-// CreateRenderer returns a new renderer for this select entry.
 func (e *SelectEntry) CreateRenderer() fyne.WidgetRenderer {
-	e.ExtendBaseWidget(e)
-	e.SetOptions(e.options)
-	return e.Entry.CreateRenderer()
+	_ = "STUB: not implemented"
+	return *new(fyne.WidgetRenderer)
 }
 
-// Enable this widget, updating any style or features appropriately.
-func (e *SelectEntry) Enable() {
-	if e.ActionItem != nil {
-		e.ActionItem.(fyne.Disableable).Enable()
-	}
-	e.Entry.Enable()
-}
+func (e *SelectEntry) Enable() { _ = "STUB: not implemented"; return }
 
-// Disable this widget so that it cannot be interacted with, updating any style appropriately.
-func (e *SelectEntry) Disable() {
-	if e.ActionItem != nil {
-		e.ActionItem.(fyne.Disableable).Disable()
-	}
-	e.Entry.Disable()
-}
+func (e *SelectEntry) Disable() { _ = "STUB: not implemented"; return }
 
-// MinSize returns the minimal size of the select entry.
-func (e *SelectEntry) MinSize() fyne.Size {
-	e.ExtendBaseWidget(e)
-	return e.Entry.MinSize()
-}
+func (e *SelectEntry) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-// Move changes the relative position of the select entry.
-func (e *SelectEntry) Move(pos fyne.Position) {
-	e.Entry.Move(pos)
-	if e.popUp != nil {
-		e.popUp.Move(e.popUpPos())
-	}
-}
+func (e *SelectEntry) Move(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// Resize changes the size of the select entry.
-func (e *SelectEntry) Resize(size fyne.Size) {
-	e.Entry.Resize(size)
-	if e.popUp != nil {
-		e.popUp.Resize(fyne.NewSize(size.Width, e.popUp.Size().Height))
-	}
-}
+func (e *SelectEntry) Resize(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-// SetOptions sets the options the user might select from.
-func (e *SelectEntry) SetOptions(options []string) {
-	e.options = options
-	items := make([]*fyne.MenuItem, len(options))
-	for i, option := range options {
-		option := option // capture
-		items[i] = fyne.NewMenuItem(option, func() { e.SetText(option) })
-	}
-	e.dropDown = fyne.NewMenu("", items...)
-
-	if e.ActionItem == nil {
-		e.ActionItem = e.setupDropDown()
-		if e.Disabled() {
-			e.ActionItem.(fyne.Disableable).Disable()
-		}
-	}
-}
+func (e *SelectEntry) SetOptions(options []string) { _ = "STUB: not implemented"; return }
 
 func (e *SelectEntry) popUpPos() fyne.Position {
-	entryPos := fyne.CurrentApp().Driver().AbsolutePositionForObject(e.super())
-	return entryPos.Add(fyne.NewPos(0, e.Size().Height-e.Theme().Size(theme.SizeNameInputBorder)))
+	_ = "STUB: not implemented"
+	return *new(fyne.Position)
 }
 
-func (e *SelectEntry) setupDropDown() *Button {
-	dropDownButton := NewButton("", func() {
-		c := fyne.CurrentApp().Driver().CanvasForObject(e.super())
-		if c == nil {
-			// SelectEntry detached from its canvas; nothing to host the
-			// dropdown on (see fyne-io/fyne#5965).
-			return
-		}
-
-		e.popUp = NewPopUpMenu(e.dropDown, c)
-		e.popUp.ShowAtPosition(e.popUpPos())
-		e.popUp.Resize(fyne.NewSize(e.Size().Width, e.popUp.MinSize().Height))
-	})
-	dropDownButton.Importance = LowImportance
-	dropDownButton.SetIcon(e.Theme().Icon(theme.IconNameArrowDropDown))
-	return dropDownButton
-}
+func (e *SelectEntry) setupDropDown() *Button { _ = "STUB: not implemented"; return nil }

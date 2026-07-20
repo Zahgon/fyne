@@ -2,30 +2,21 @@ package test
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/theme"
 )
 
 type mockCloud struct {
 	configured bool
 }
 
-func (c *mockCloud) Cleanup(_ fyne.App) {
-	c.configured = false
-}
+func (c *mockCloud) Cleanup(_ fyne.App) { _ = "STUB: not implemented"; return }
 
-func (c *mockCloud) ProviderDescription() string {
-	return "Mock cloud implementation"
-}
+func (c *mockCloud) ProviderDescription() string { _ = "STUB: not implemented"; return "" }
 
 func (c *mockCloud) ProviderIcon() fyne.Resource {
-	return theme.ComputerIcon()
+	_ = "STUB: not implemented"
+	return *new(fyne.Resource)
 }
 
-func (c *mockCloud) ProviderName() string {
-	return "mock"
-}
+func (c *mockCloud) ProviderName() string { _ = "STUB: not implemented"; return "" }
 
-func (c *mockCloud) Setup(_ fyne.App) error {
-	c.configured = true
-	return nil
-}
+func (c *mockCloud) Setup(_ fyne.App) error { _ = "STUB: not implemented"; return nil }

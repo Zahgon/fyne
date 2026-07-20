@@ -2,22 +2,12 @@
 
 package app
 
-func (s *settings) load() {
-	s.setupTheme()
-	s.schema.Scale = 1
-}
+func (s *settings) load() { _ = "STUB: not implemented"; return }
 
-func (s *settings) loadFromFile(path string) error {
-	return nil
-}
+func (s *settings) loadFromFile(path string) error { _ = "STUB: not implemented"; return nil }
 
-func watchFile(path string, callback func()) {
-}
+func watchFile(path string, callback func()) { _ = "STUB: not implemented"; return }
 
-func (s *settings) watchSettings() {
-	watchTheme(s)
-}
+func (s *settings) watchSettings() { _ = "STUB: not implemented"; return }
 
-func (s *settings) stopWatching() {
-	stopWatchingTheme()
-}
+func (s *settings) stopWatching() { _ = "STUB: not implemented"; return }

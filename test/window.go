@@ -18,124 +18,67 @@ type window struct {
 	menu   *fyne.MainMenu
 }
 
-// NewWindow creates and registers a new window for test purposes
 func NewWindow(content fyne.CanvasObject) fyne.Window {
-	window := fyne.CurrentApp().NewWindow("")
-	window.SetContent(content)
-	return window
+	_ = "STUB: not implemented"
+	return *new(fyne.Window)
 }
 
-func (w *window) Canvas() fyne.Canvas {
-	return w.canvas
-}
+func (w *window) Canvas() fyne.Canvas { _ = "STUB: not implemented"; return *new(fyne.Canvas) }
 
-func (w *window) CenterOnScreen() {
-	// no-op
-}
+func (w *window) CenterOnScreen() { _ = "STUB: not implemented"; return }
 
-func (w *window) Clipboard() fyne.Clipboard {
-	return NewClipboard()
-}
+func (w *window) Clipboard() fyne.Clipboard { _ = "STUB: not implemented"; return *new(fyne.Clipboard) }
 
-func (w *window) Close() {
-	if w.onClosed != nil {
-		w.onClosed()
-	}
-	w.focused = false
-	w.driver.removeWindow(w)
-}
+func (w *window) Close() { _ = "STUB: not implemented"; return }
 
 func (w *window) Content() fyne.CanvasObject {
-	return w.Canvas().Content()
+	_ = "STUB: not implemented"
+	return *new(fyne.CanvasObject)
 }
 
-func (w *window) FixedSize() bool {
-	return w.fixedSize
-}
+func (w *window) FixedSize() bool { _ = "STUB: not implemented"; return false }
 
-func (w *window) FullScreen() bool {
-	return w.fullScreen
-}
+func (w *window) FullScreen() bool { _ = "STUB: not implemented"; return false }
 
-func (w *window) Hide() {
-	w.focused = false
-}
+func (w *window) Hide() { _ = "STUB: not implemented"; return }
 
-func (w *window) Icon() fyne.Resource {
-	return fyne.CurrentApp().Icon()
-}
+func (w *window) Icon() fyne.Resource { _ = "STUB: not implemented"; return *new(fyne.Resource) }
 
-func (w *window) MainMenu() *fyne.MainMenu {
-	return w.menu
-}
+func (w *window) MainMenu() *fyne.MainMenu { _ = "STUB: not implemented"; return nil }
 
-func (w *window) Padded() bool {
-	return w.canvas.Padded()
-}
+func (w *window) Padded() bool { _ = "STUB: not implemented"; return false }
 
-func (w *window) RequestFocus() {
-	for _, win := range w.driver.AllWindows() {
-		win.(*window).focused = false
-	}
+func (w *window) RequestFocus() { _ = "STUB: not implemented"; return }
 
-	w.focused = true
-}
+func (w *window) Resize(size fyne.Size) { _ = "STUB: not implemented"; return }
 
-func (w *window) Resize(size fyne.Size) {
-	w.canvas.Resize(size)
-}
+func (w *window) SetContent(obj fyne.CanvasObject) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetContent(obj fyne.CanvasObject) {
-	w.Canvas().SetContent(obj)
-}
+func (w *window) SetFixedSize(fixed bool) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetFixedSize(fixed bool) {
-	w.fixedSize = fixed
-}
+func (w *window) SetIcon(_ fyne.Resource) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetIcon(_ fyne.Resource) {
-	// no-op
-}
+func (w *window) SetFullScreen(fullScreen bool) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetFullScreen(fullScreen bool) {
-	w.fullScreen = fullScreen
-}
+func (w *window) SetMainMenu(menu *fyne.MainMenu) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetMainMenu(menu *fyne.MainMenu) {
-	w.menu = menu
-}
+func (w *window) SetMaster() { _ = "STUB: not implemented"; return }
 
-func (w *window) SetMaster() {
-	// no-op
-}
+func (w *window) SetOnClosed(closed func()) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetOnClosed(closed func()) {
-	w.onClosed = closed
-}
-
-func (w *window) SetCloseIntercept(callback func()) {
-	w.onCloseIntercepted = callback
-}
+func (w *window) SetCloseIntercept(callback func()) { _ = "STUB: not implemented"; return }
 
 func (w *window) SetOnDropped(dropped func(fyne.Position, []fyne.URI)) {
+	_ = "STUB: not implemented"
+	return
 }
 
-func (w *window) SetPadded(padded bool) {
-	w.canvas.SetPadded(padded)
-}
+func (w *window) SetPadded(padded bool) { _ = "STUB: not implemented"; return }
 
-func (w *window) SetTitle(title string) {
-	w.title = title
-}
+func (w *window) SetTitle(title string) { _ = "STUB: not implemented"; return }
 
-func (w *window) Show() {
-	w.RequestFocus()
-}
+func (w *window) Show() { _ = "STUB: not implemented"; return }
 
-func (w *window) ShowAndRun() {
-	w.Show()
-}
+func (w *window) ShowAndRun() { _ = "STUB: not implemented"; return }
 
-func (w *window) Title() string {
-	return w.title
-}
+func (w *window) Title() string { _ = "STUB: not implemented"; return "" }

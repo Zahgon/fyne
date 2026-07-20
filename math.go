@@ -1,17 +1,5 @@
 package fyne
 
-// Min returns the smaller of the passed values.
-func Min(x, y float32) float32 {
-	if x < y {
-		return x
-	}
-	return y
-}
+func Min(x, y float32) float32 { _ = "STUB: not implemented"; return 0 }
 
-// Max returns the larger of the passed values.
-func Max(x, y float32) float32 {
-	if x > y {
-		return x
-	}
-	return y
-}
+func Max(x, y float32) float32 { _ = "STUB: not implemented"; return 0 }

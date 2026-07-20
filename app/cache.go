@@ -5,7 +5,6 @@ import (
 	"io"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/storage"
 )
 
 type cache struct {
@@ -14,61 +13,25 @@ type cache struct {
 	enc base64.Encoding
 }
 
-func makeCache(a fyne.App) fyne.Cache {
-	c := &cache{a: a, enc: base64.Encoding{}}
+func makeCache(a fyne.App) fyne.Cache { _ = "STUB: not implemented"; return *new(fyne.Cache) }
 
-	root := c.RootURI()
-	exists, err := storage.Exists(root)
-	if !exists || err != nil {
-		parent, _ := storage.Parent(root)
-		exists, err = storage.Exists(parent)
-		if !exists || err != nil {
-			err = storage.CreateListable(parent)
-			if err != nil {
-				fyne.LogError("Failed to create fyne cache space", err)
-			}
-		}
+func (c *cache) RootURI() fyne.URI { _ = "STUB: not implemented"; return *new(fyne.URI) }
 
-		err = storage.CreateListable(root)
-		if err != nil {
-			fyne.LogError("Failed to create app cache space", err)
-		}
-	}
-
-	return c
-}
-
-func (c *cache) RootURI() fyne.URI {
-	return storage.NewFileURI(rootCacheDir(c.a))
-}
-
-func (c *cache) Exists(name string) bool {
-	path := c.encodePath(name)
-
-	ok, err := storage.Exists(path)
-	return ok && err == nil
-}
+func (c *cache) Exists(name string) bool { _ = "STUB: not implemented"; return false }
 
 func (c *cache) Read(name string) (io.ReadCloser, error) {
-	path := c.encodePath(name)
-
-	return storage.Reader(path)
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }
 
 func (c *cache) Write(name string) (io.WriteCloser, error) {
-	path := c.encodePath(name)
-
-	return storage.Writer(path)
+	_ = "STUB: not implemented"
+	return *new(io.WriteCloser), nil
 }
 
-func (c *cache) Remove(name string) error {
-	path := c.encodePath(name)
-
-	return storage.Delete(path)
-}
+func (c *cache) Remove(name string) error { _ = "STUB: not implemented"; return nil }
 
 func (c *cache) encodePath(badName string) fyne.URI {
-	name := base64.StdEncoding.EncodeToString([]byte(badName))
-	child, _ := storage.Child(c.a.Cache().RootURI(), name)
-	return child
+	_ = "STUB: not implemented"
+	return *new(fyne.URI)
 }

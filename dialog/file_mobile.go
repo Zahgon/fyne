@@ -4,40 +4,19 @@ package dialog
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/internal/driver/mobile"
-	"fyne.io/fyne/v2/storage"
 )
 
-func (f *fileDialog) getPlaces() []favoriteItem {
-	return []favoriteItem{}
-}
+func (f *fileDialog) getPlaces() []favoriteItem { _ = "STUB: not implemented"; return nil }
 
-func isHidden(file fyne.URI) bool {
-	if file.Scheme() != fyne.URISchemeFile {
-		fyne.LogError("Cannot check if non file is hidden", nil)
-		return false
-	}
-	return false
-}
+func isHidden(file fyne.URI) bool { _ = "STUB: not implemented"; return false }
 
-func hideFile(filename string) error {
-	return nil
-}
+func hideFile(filename string) error { _ = "STUB: not implemented"; return nil }
 
-func fileOpenOSOverride(f *FileDialog) bool {
-	if f.isDirectory() {
-		mobile.ShowFolderOpenPicker(f.callback.(func(fyne.ListableURI, error)))
-	} else {
-		mobile.ShowFileOpenPicker(f.callback.(func(fyne.URIReadCloser, error)), f.filter)
-	}
-	return true
-}
+func fileOpenOSOverride(f *FileDialog) bool { _ = "STUB: not implemented"; return false }
 
-func fileSaveOSOverride(f *FileDialog) bool {
-	mobile.ShowFileSavePicker(f.callback.(func(fyne.URIWriteCloser, error)), f.filter, f.initialFileName)
-	return true
-}
+func fileSaveOSOverride(f *FileDialog) bool { _ = "STUB: not implemented"; return false }
 
 func getFavoriteLocation(homeURI fyne.URI, name string) (fyne.URI, error) {
-	return storage.Child(homeURI, name)
+	_ = "STUB: not implemented"
+	return *new(fyne.URI), nil
 }

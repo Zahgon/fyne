@@ -4,8 +4,6 @@ import (
 	"fyne.io/fyne/v2/canvas"
 )
 
-// cubeShaderSource renders a spinning 3D cube by ray marching a box signed
-// distance field. It targets desktop OpenGL (core profile, GLSL 110).
 const cubeShaderSource = `#version 110
 
 uniform vec2 frame;
@@ -91,7 +89,6 @@ void main() {
 }
 `
 
-// cubeShaderSourceES is the OpenGL ES / mobile / web variant of cubeShaderSource.
 const cubeShaderSourceES = `#version 100
 
 #ifdef GL_ES
@@ -186,15 +183,4 @@ void main() {
 }
 `
 
-// newCubeShader builds a Shader that draws a spinning, shaded cube and starts
-// the animation that advances its "time" uniform. The animation's Stop is
-// registered with OnChangeFuncs so it pauses when leaving the canvas tutorial.
-func newCubeShader() *canvas.Shader {
-	shader := canvas.NewShader("demoSpinningCube", []byte(cubeShaderSource), []byte(cubeShaderSourceES))
-
-	anim := canvas.NewShaderAnimation(shader)
-	anim.Start()
-	OnChangeFuncs = append(OnChangeFuncs, anim.Stop)
-
-	return shader
-}
+func newCubeShader() *canvas.Shader { _ = "STUB: not implemented"; return nil }
