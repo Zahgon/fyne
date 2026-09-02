@@ -1,32 +1,20 @@
 package binding
 
 import (
-	"errors"
 	"reflect"
-
-	"fyne.io/fyne/v2"
 )
 
-// DataMap is the base interface for all bindable data maps.
-//
-// Since: 2.0
 type DataMap interface {
 	DataItem
 	GetItem(string) (DataItem, error)
 	Keys() []string
 }
 
-// ExternalUntypedMap is a map data binding with all values untyped (any), connected to an external data source.
-//
-// Since: 2.0
 type ExternalUntypedMap interface {
 	UntypedMap
 	Reload() error
 }
 
-// UntypedMap is a map data binding with all values Untyped (any).
-//
-// Since: 2.0
 type UntypedMap interface {
 	DataMap
 	Delete(string)
@@ -36,33 +24,13 @@ type UntypedMap interface {
 	SetValue(string, any) error
 }
 
-// NewUntypedMap creates a new, empty map binding of string to any.
-//
-// Since: 2.0
-func NewUntypedMap() UntypedMap {
-	return newExternalUntypedMap()
-}
+func NewUntypedMap() UntypedMap { _ = "STUB: not implemented"; return *new(UntypedMap) }
 
-// BindUntypedMap creates a new map binding of string to any based on the data passed.
-// If your code changes the content of the map this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
 func BindUntypedMap(d *map[string]any) ExternalUntypedMap {
-	if d == nil {
-		return newExternalUntypedMap()
-	}
-	m := &mapBase{items: make(map[string]reflectUntyped), val: d, updateExternal: true}
-
-	for k := range *d {
-		m.setItem(k, bindUntypedMapValue(d, k, m.updateExternal))
-	}
-
-	return m
+	_ = "STUB: not implemented"
+	return *new(ExternalUntypedMap)
 }
 
-// Struct is the base interface for a bound struct type.
-//
-// Since: 2.0
 type Struct interface {
 	DataMap
 	GetValue(string) (any, error)
@@ -70,45 +38,11 @@ type Struct interface {
 	Reload() error
 }
 
-// BindStruct creates a new map binding of string to any using the struct passed as data.
-// The key for each item is a string representation of each exported field with the value set as an any.
-// Only exported fields are included.
-//
-// Since: 2.0
-func BindStruct(i any) Struct {
-	if i == nil {
-		return newExternalUntypedMap()
-	}
-	t := reflect.TypeOf(i)
-	if t.Kind() != reflect.Pointer ||
-		(reflect.TypeOf(reflect.ValueOf(i).Elem()).Kind() != reflect.Struct) {
-		fyne.LogError("Invalid type passed to BindStruct, must be pointer to struct", nil)
-		return newExternalUntypedMap()
-	}
-
-	s := &boundStruct{orig: i}
-	s.items = make(map[string]reflectUntyped)
-	s.val = &map[string]any{}
-	s.updateExternal = true
-
-	v := reflect.ValueOf(i).Elem()
-	t = v.Type()
-	for j := 0; j < v.NumField(); j++ {
-		f := v.Field(j)
-		if !f.CanSet() {
-			continue
-		}
-
-		key := t.Field(j).Name
-		s.items[key] = bindReflect(f)
-		(*s.val)[key] = f.Interface()
-	}
-
-	return s
-}
+func BindStruct(i any) Struct { _ = "STUB: not implemented"; return *new(Struct) }
 
 func newExternalUntypedMap() ExternalUntypedMap {
-	return &mapBase{items: make(map[string]reflectUntyped), val: &map[string]any{}}
+	_ = "STUB: not implemented"
+	return *new(ExternalUntypedMap)
 }
 
 type reflectUntyped interface {
@@ -126,140 +60,30 @@ type mapBase struct {
 }
 
 func (b *mapBase) GetItem(key string) (DataItem, error) {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
-
-	if v, ok := b.items[key]; ok {
-		return v, nil
-	}
-
-	return nil, errKeyNotFound
+	_ = "STUB: not implemented"
+	return *new(DataItem), nil
 }
 
-func (b *mapBase) Keys() []string {
-	b.lock.Lock()
-	defer b.lock.Unlock()
+func (b *mapBase) Keys() []string { _ = "STUB: not implemented"; return nil }
 
-	ret := make([]string, len(b.items))
-	i := 0
-	for k := range b.items {
-		ret[i] = k
-		i++
-	}
+func (b *mapBase) Delete(key string) { _ = "STUB: not implemented"; return }
 
-	return ret
-}
-
-func (b *mapBase) Delete(key string) {
-	b.lock.Lock()
-	defer b.lock.Unlock()
-
-	delete(b.items, key)
-
-	b.trigger()
-}
-
-func (b *mapBase) Get() (map[string]any, error) {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
-
-	if b.val == nil {
-		return map[string]any{}, nil
-	}
-
-	return *b.val, nil
-}
+func (b *mapBase) Get() (map[string]any, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func (b *mapBase) GetValue(key string) (any, error) {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
-
-	if i, ok := b.items[key]; ok {
-		return i.get()
-	}
-
-	return nil, errKeyNotFound
+	_ = "STUB: not implemented"
+	return *new(any), nil
 }
 
-func (b *mapBase) Reload() error {
-	b.lock.Lock()
-	defer b.lock.Unlock()
+func (b *mapBase) Reload() error { _ = "STUB: not implemented"; return nil }
 
-	return b.doReload()
-}
+func (b *mapBase) Set(v map[string]any) error { _ = "STUB: not implemented"; return nil }
 
-func (b *mapBase) Set(v map[string]any) error {
-	b.lock.Lock()
-	defer b.lock.Unlock()
+func (b *mapBase) SetValue(key string, d any) error { _ = "STUB: not implemented"; return nil }
 
-	if b.val == nil { // was not initialized with a blank value, recover
-		b.val = &v
-		b.trigger()
-		return nil
-	}
+func (b *mapBase) doReload() (retErr error) { _ = "STUB: not implemented"; return nil }
 
-	*b.val = v
-	return b.doReload()
-}
-
-func (b *mapBase) SetValue(key string, d any) error {
-	b.lock.Lock()
-	defer b.lock.Unlock()
-
-	if i, ok := b.items[key]; ok {
-		return i.set(d)
-	}
-
-	(*b.val)[key] = d
-	item := bindUntypedMapValue(b.val, key, b.updateExternal)
-	b.setItem(key, item)
-	return nil
-}
-
-func (b *mapBase) doReload() (retErr error) {
-	changed := false
-	// add new
-	for key := range *b.val {
-		_, found := b.items[key]
-		if !found {
-			b.setItem(key, bindUntypedMapValue(b.val, key, b.updateExternal))
-			changed = true
-		}
-	}
-
-	// remove old
-	for key := range b.items {
-		_, found := (*b.val)[key]
-		if !found {
-			delete(b.items, key)
-			changed = true
-		}
-	}
-	if changed {
-		b.trigger()
-	}
-
-	for k, item := range b.items {
-		var err error
-
-		if b.updateExternal {
-			err = item.(*boundExternalMapValue).setIfChanged((*b.val)[k])
-		} else {
-			err = item.(*boundMapValue).set((*b.val)[k])
-		}
-
-		if err != nil {
-			retErr = err
-		}
-	}
-	return retErr
-}
-
-func (b *mapBase) setItem(key string, d reflectUntyped) {
-	b.items[key] = d
-
-	b.trigger()
-}
+func (b *mapBase) setItem(key string, d reflectUntyped) { _ = "STUB: not implemented"; return }
 
 type boundStruct struct {
 	mapBase
@@ -267,57 +91,11 @@ type boundStruct struct {
 	orig any
 }
 
-func (b *boundStruct) Reload() (retErr error) {
-	b.lock.Lock()
-	defer b.lock.Unlock()
-
-	v := reflect.ValueOf(b.orig).Elem()
-	t := v.Type()
-	for j := 0; j < v.NumField(); j++ {
-		f := v.Field(j)
-		if !f.CanSet() {
-			continue
-		}
-		kind := f.Kind()
-		if kind == reflect.Slice || kind == reflect.Struct {
-			fyne.LogError("Data binding does not yet support slice or struct elements in a struct", nil)
-			continue
-		}
-
-		key := t.Field(j).Name
-		old := (*b.val)[key]
-		if f.Interface() == old {
-			continue
-		}
-
-		var err error
-		switch kind {
-		case reflect.Bool:
-			err = b.items[key].(*boundReflect[bool]).Set(f.Bool())
-		case reflect.Float32, reflect.Float64:
-			err = b.items[key].(*boundReflect[float64]).Set(f.Float())
-		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-			err = b.items[key].(*boundReflect[int]).Set(int(f.Int()))
-		case reflect.String:
-			err = b.items[key].(*boundReflect[string]).Set(f.String())
-		}
-		if err != nil {
-			retErr = err
-		}
-		(*b.val)[key] = f.Interface()
-	}
-	return retErr
-}
+func (b *boundStruct) Reload() (retErr error) { _ = "STUB: not implemented"; return nil }
 
 func bindUntypedMapValue(m *map[string]any, k string, external bool) reflectUntyped {
-	if external {
-		ret := &boundExternalMapValue{old: (*m)[k]}
-		ret.val = m
-		ret.key = k
-		return ret
-	}
-
-	return &boundMapValue{val: m, key: k}
+	_ = "STUB: not implemented"
+	return *new(reflectUntyped)
 }
 
 type boundMapValue struct {
@@ -327,20 +105,9 @@ type boundMapValue struct {
 	key string
 }
 
-func (b *boundMapValue) get() (any, error) {
-	if v, ok := (*b.val)[b.key]; ok {
-		return v, nil
-	}
+func (b *boundMapValue) get() (any, error) { _ = "STUB: not implemented"; return *new(any), nil }
 
-	return nil, errKeyNotFound
-}
-
-func (b *boundMapValue) set(val any) error {
-	(*b.val)[b.key] = val
-
-	b.trigger()
-	return nil
-}
+func (b *boundMapValue) set(val any) error { _ = "STUB: not implemented"; return nil }
 
 type boundExternalMapValue struct {
 	boundMapValue
@@ -348,14 +115,7 @@ type boundExternalMapValue struct {
 	old any
 }
 
-func (b *boundExternalMapValue) setIfChanged(val any) error {
-	if val == b.old {
-		return nil
-	}
-	b.old = val
-
-	return b.set(val)
-}
+func (b *boundExternalMapValue) setIfChanged(val any) error { _ = "STUB: not implemented"; return nil }
 
 type boundReflect[T any] struct {
 	base
@@ -363,53 +123,15 @@ type boundReflect[T any] struct {
 	val reflect.Value
 }
 
-func (b *boundReflect[T]) Get() (T, error) {
-	var zero T
-	val, err := b.get()
-	if err != nil {
-		return zero, err
-	}
+func (b *boundReflect[T]) Get() (T, error) { _ = "STUB: not implemented"; return *new(T), nil }
 
-	casted, ok := val.(T)
-	if !ok {
-		return zero, errors.New("unable to convert value to type")
-	}
+func (b *boundReflect[T]) Set(val T) error { _ = "STUB: not implemented"; return nil }
 
-	return casted, nil
-}
+func (b *boundReflect[T]) get() (any, error) { _ = "STUB: not implemented"; return *new(any), nil }
 
-func (b *boundReflect[T]) Set(val T) error {
-	return b.set(val)
-}
-
-func (b *boundReflect[T]) get() (any, error) {
-	if !b.val.CanInterface() {
-		return nil, errors.New("unable to get value from data binding")
-	}
-
-	return b.val.Interface(), nil
-}
-
-func (b *boundReflect[T]) set(val any) error {
-	if !b.val.CanSet() {
-		return errors.New("unable to set value in data binding")
-	}
-
-	b.val.Set(reflect.ValueOf(val))
-	b.trigger()
-	return nil
-}
+func (b *boundReflect[T]) set(val any) error { _ = "STUB: not implemented"; return nil }
 
 func bindReflect(field reflect.Value) reflectUntyped {
-	switch field.Kind() {
-	case reflect.Bool:
-		return &boundReflect[bool]{val: field}
-	case reflect.Float32, reflect.Float64:
-		return &boundReflect[float64]{val: field}
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		return &boundReflect[int]{val: field}
-	case reflect.String:
-		return &boundReflect[string]{val: field}
-	}
-	return &boundReflect[any]{val: field}
+	_ = "STUB: not implemented"
+	return *new(reflectUntyped)
 }

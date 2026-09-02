@@ -4,18 +4,14 @@ import (
 	"fyne.io/fyne/v2"
 )
 
-// OnChangeFuncs is a slice of functions that can be registered
-// to run when the user switches tutorial.
 var OnChangeFuncs []func()
 
-// Tutorial defines the data structure for a tutorial
 type Tutorial struct {
 	Title, Intro string
 	View         func(w fyne.Window) fyne.CanvasObject
 }
 
 var (
-	// Tutorials defines the metadata for each tutorial
 	Tutorials = map[string]Tutorial{
 		"welcome": {"Welcome", "", welcomeScreen},
 		"canvas": {
@@ -190,7 +186,6 @@ var (
 		},
 	}
 
-	// TutorialIndex  defines how our tutorials should be laid out in the index tree
 	TutorialIndex = map[string][]string{
 		"":            {"welcome", "canvas", "animations", "icons", "widgets", "collections", "containers", "dialogs", "windows", "binding", "advanced"},
 		"collections": {"list", "table", "tree", "gridwrap"},

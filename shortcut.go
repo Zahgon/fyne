@@ -2,35 +2,23 @@ package fyne
 
 import "sync"
 
-// ShortcutHandler is a default implementation of the shortcut handler
-// for [CanvasObject].
 type ShortcutHandler struct {
-	entry sync.Map // map[string]func(Shortcut)
+	entry sync.Map
 }
 
-// TypedShortcut handle the registered shortcut
-func (sh *ShortcutHandler) TypedShortcut(shortcut Shortcut) {
-	if val, ok := sh.entry.Load(shortcut.ShortcutName()); ok {
-		val.(func(Shortcut))(shortcut)
-	}
-}
+func (sh *ShortcutHandler) TypedShortcut(shortcut Shortcut) { _ = "STUB: not implemented"; return }
 
-// AddShortcut register a handler to be executed when the shortcut action is triggered
 func (sh *ShortcutHandler) AddShortcut(shortcut Shortcut, handler func(shortcut Shortcut)) {
-	sh.entry.Store(shortcut.ShortcutName(), handler)
+	_ = "STUB: not implemented"
+	return
 }
 
-// RemoveShortcut removes a registered shortcut
-func (sh *ShortcutHandler) RemoveShortcut(shortcut Shortcut) {
-	sh.entry.Delete(shortcut.ShortcutName())
-}
+func (sh *ShortcutHandler) RemoveShortcut(shortcut Shortcut) { _ = "STUB: not implemented"; return }
 
-// Shortcut is the interface used to describe a shortcut action
 type Shortcut interface {
 	ShortcutName() string
 }
 
-// KeyboardShortcut describes a shortcut meant to be triggered by a keyboard action.
 type KeyboardShortcut interface {
 	Shortcut
 	Key() KeyName
@@ -39,142 +27,72 @@ type KeyboardShortcut interface {
 
 var _ KeyboardShortcut = (*ShortcutPaste)(nil)
 
-// ShortcutPaste describes a shortcut paste action.
 type ShortcutPaste struct {
 	Clipboard Clipboard
-	// Secondary indicates an alternative buffer such as selection, when true
-	//
-	// Since: 2.8
+
 	Secondary bool
 }
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutPaste) Key() KeyName {
-	return KeyV
-}
+func (*ShortcutPaste) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutPaste) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutPaste) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutPaste) ShortcutName() string {
-	return "Paste"
-}
+func (*ShortcutPaste) ShortcutName() string { _ = "STUB: not implemented"; return "" }
 
 var _ KeyboardShortcut = (*ShortcutCopy)(nil)
 
-// ShortcutCopy describes a shortcut copy action.
 type ShortcutCopy struct {
 	Clipboard Clipboard
-	// Secondary indicates an alternative buffer such as selection, when true
-	//
-	// Since: 2.8
+
 	Secondary bool
 }
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutCopy) Key() KeyName {
-	return KeyC
-}
+func (*ShortcutCopy) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutCopy) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutCopy) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutCopy) ShortcutName() string {
-	return "Copy"
-}
+func (*ShortcutCopy) ShortcutName() string { _ = "STUB: not implemented"; return "" }
 
 var _ KeyboardShortcut = (*ShortcutCut)(nil)
 
-// ShortcutCut describes a shortcut cut action.
 type ShortcutCut struct {
 	Clipboard Clipboard
-	// Secondary indicates an alternative buffer such as selection, when true
-	//
-	// Since: 2.8
+
 	Secondary bool
 }
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutCut) Key() KeyName {
-	return KeyX
-}
+func (*ShortcutCut) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutCut) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutCut) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutCut) ShortcutName() string {
-	return "Cut"
-}
+func (*ShortcutCut) ShortcutName() string { _ = "STUB: not implemented"; return "" }
 
 var _ KeyboardShortcut = (*ShortcutSelectAll)(nil)
 
-// ShortcutSelectAll describes a shortcut selectAll action.
 type ShortcutSelectAll struct{}
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutSelectAll) Key() KeyName {
-	return KeyA
-}
+func (*ShortcutSelectAll) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutSelectAll) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutSelectAll) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutSelectAll) ShortcutName() string {
-	return "SelectAll"
-}
+func (*ShortcutSelectAll) ShortcutName() string { _ = "STUB: not implemented"; return "" }
 
 var _ KeyboardShortcut = (*ShortcutUndo)(nil)
 
-// ShortcutUndo describes a shortcut undo action.
-//
-// Since: 2.5
 type ShortcutUndo struct{}
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutUndo) Key() KeyName {
-	return KeyZ
-}
+func (*ShortcutUndo) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutUndo) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutUndo) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutUndo) ShortcutName() string {
-	return "Undo"
-}
+func (*ShortcutUndo) ShortcutName() string { _ = "STUB: not implemented"; return "" }
 
 var _ KeyboardShortcut = (*ShortcutRedo)(nil)
 
-// ShortcutRedo describes a shortcut redo action.
-//
-// Since: 2.5
 type ShortcutRedo struct{}
 
-// Key returns the [KeyName] for this shortcut.
-func (*ShortcutRedo) Key() KeyName {
-	return KeyY
-}
+func (*ShortcutRedo) Key() KeyName { _ = "STUB: not implemented"; return *new(KeyName) }
 
-// Mod returns the [KeyModifier] for this shortcut.
-func (*ShortcutRedo) Mod() KeyModifier {
-	return KeyModifierShortcutDefault
-}
+func (*ShortcutRedo) Mod() KeyModifier { _ = "STUB: not implemented"; return *new(KeyModifier) }
 
-// ShortcutName returns the shortcut name
-func (*ShortcutRedo) ShortcutName() string {
-	return "Redo"
-}
+func (*ShortcutRedo) ShortcutName() string { _ = "STUB: not implemented"; return "" }

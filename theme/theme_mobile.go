@@ -5,5 +5,6 @@ package theme
 import "fyne.io/fyne/v2"
 
 func setupSystemTheme(fallback fyne.Theme) fyne.Theme {
-	return fallback
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme)
 }

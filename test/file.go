@@ -2,13 +2,10 @@ package test
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"os"
-	"path/filepath"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/storage"
 )
 
 var errUnsupportedURLProtocol = errors.New("unsupported URL protocol")
@@ -22,85 +19,39 @@ type directory struct {
 	fyne.URI
 }
 
-// Declare conformity to the ListableURI interface
 var _ fyne.ListableURI = (*directory)(nil)
 
 func (f *file) Open() (io.ReadCloser, error) {
-	return os.Open(f.path)
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }
 
 func (f *file) Save() (io.WriteCloser, error) {
-	return os.Open(f.path)
+	_ = "STUB: not implemented"
+	return *new(io.WriteCloser), nil
 }
 
-func (*file) ReadOnly() bool {
-	return true
-}
+func (*file) ReadOnly() bool { _ = "STUB: not implemented"; return false }
 
-func (f *file) Name() string {
-	return filepath.Base(f.path)
-}
+func (f *file) Name() string { _ = "STUB: not implemented"; return "" }
 
-func (f *file) URI() fyne.URI {
-	return storage.NewFileURI(f.path)
-}
+func (f *file) URI() fyne.URI { _ = "STUB: not implemented"; return *new(fyne.URI) }
 
-func openFile(uri fyne.URI, create bool) (*file, error) {
-	if uri.Scheme() != "file" {
-		return nil, errUnsupportedURLProtocol
-	}
-
-	path := uri.Path()
-	if create {
-		f, err := os.Create(path)
-		return &file{File: f, path: path}, err
-	}
-
-	f, err := os.Open(path)
-	return &file{File: f, path: path}, err
-}
+func openFile(uri fyne.URI, create bool) (*file, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func (*driver) FileReaderForURI(uri fyne.URI) (fyne.URIReadCloser, error) {
-	return openFile(uri, false)
+	_ = "STUB: not implemented"
+	return *new(fyne.URIReadCloser), nil
 }
 
 func (*driver) FileWriterForURI(uri fyne.URI) (fyne.URIWriteCloser, error) {
-	return openFile(uri, true)
+	_ = "STUB: not implemented"
+	return *new(fyne.URIWriteCloser), nil
 }
 
 func (*driver) ListerForURI(uri fyne.URI) (fyne.ListableURI, error) {
-	if uri.Scheme() != "file" {
-		return nil, errUnsupportedURLProtocol
-	}
-
-	path := uri.Path()
-	s, err := os.Stat(path)
-	if err != nil {
-		return nil, err
-	}
-
-	if !s.IsDir() {
-		return nil, fmt.Errorf("path '%s' is not a directory, cannot convert to listable URI", path)
-	}
-
-	return &directory{URI: uri}, nil
+	_ = "STUB: not implemented"
+	return *new(fyne.ListableURI), nil
 }
 
-func (d *directory) List() ([]fyne.URI, error) {
-	if d.Scheme() != "file" {
-		return nil, errUnsupportedURLProtocol
-	}
-
-	path := d.Path()
-	files, err := os.ReadDir(path)
-	if err != nil {
-		return nil, err
-	}
-
-	urilist := make([]fyne.URI, len(files))
-	for i, f := range files {
-		urilist[i] = storage.NewFileURI(filepath.Join(path, f.Name()))
-	}
-
-	return urilist, nil
-}
+func (d *directory) List() ([]fyne.URI, error) { _ = "STUB: not implemented"; return nil, nil }

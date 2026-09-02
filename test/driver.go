@@ -6,16 +6,8 @@ import (
 
 	"fyne.io/fyne/v2"
 	fynedriver "fyne.io/fyne/v2/driver"
-	intdriver "fyne.io/fyne/v2/internal/driver"
-	"fyne.io/fyne/v2/internal/painter"
-	"fyne.io/fyne/v2/internal/painter/software"
-	intRepo "fyne.io/fyne/v2/internal/repository"
-	"fyne.io/fyne/v2/storage/repository"
 )
 
-// SoftwarePainter describes a simple type that can render canvases
-//
-// Deprecated: Use driver.Painter instead.
 type SoftwarePainter = fynedriver.Painter
 
 type driver struct {
@@ -25,135 +17,56 @@ type driver struct {
 	windowsMutex sync.RWMutex
 }
 
-// Declare conformity with Driver
 var _ fyne.Driver = (*driver)(nil)
 
-// NewDriver sets up and registers a new dummy driver for test purpose
-func NewDriver() fyne.Driver {
-	drv := &driver{windowsMutex: sync.RWMutex{}}
-	repository.Register("file", intRepo.NewFileRepository())
+func NewDriver() fyne.Driver { _ = "STUB: not implemented"; return *new(fyne.Driver) }
 
-	httpHandler := intRepo.NewHTTPRepository()
-	repository.Register("http", httpHandler)
-	repository.Register("https", httpHandler)
-
-	// make a single dummy window for rendering tests
-	drv.CreateWindow("")
-
-	return drv
-}
-
-// NewDriverWithPainter creates a new dummy driver that will pass the given
-// painter to all canvases created
 func NewDriverWithPainter(p fynedriver.Painter) fyne.Driver {
-	return &driver{painter: p}
+	_ = "STUB: not implemented"
+	return *new(fyne.Driver)
 }
 
-// DoFromGoroutine on a test driver ignores the wait flag as our threading is simple
-func (*driver) DoFromGoroutine(f func(), _ bool) {
-	// Tests all run on a single (but potentially different per-test) thread
-	f()
-}
+func (*driver) DoFromGoroutine(f func(), _ bool) { _ = "STUB: not implemented"; return }
 
 func (d *driver) AbsolutePositionForObject(co fyne.CanvasObject) fyne.Position {
-	c := d.CanvasForObject(co)
-	if c == nil {
-		return fyne.NewPos(0, 0)
-	}
-
-	overlays := c.Overlays().List()
-	trees := make([]fyne.CanvasObject, 0, len(overlays)+1)
-	if content := c.Content(); content != nil {
-		trees = append(trees, content)
-	}
-	trees = append(trees, overlays...)
-	pos := intdriver.AbsolutePositionForObject(co, trees)
-	inset, _ := c.InteractiveArea()
-	return pos.Subtract(inset)
+	_ = "STUB: not implemented"
+	return *new(fyne.Position)
 }
 
-func (d *driver) AllWindows() []fyne.Window {
-	d.windowsMutex.RLock()
-	defer d.windowsMutex.RUnlock()
-	return d.windows
-}
+func (d *driver) AllWindows() []fyne.Window { _ = "STUB: not implemented"; return nil }
 
 func (d *driver) CanvasForObject(fyne.CanvasObject) fyne.Canvas {
-	d.windowsMutex.RLock()
-	defer d.windowsMutex.RUnlock()
-	// cheating: probably the last created window is meant
-	return d.windows[len(d.windows)-1].Canvas()
+	_ = "STUB: not implemented"
+	return *new(fyne.Canvas)
 }
 
 func (d *driver) CreateWindow(title string) fyne.Window {
-	p := d.painter
-	if p == nil {
-		p = software.NewPainter()
-	}
-	c := NewCanvasWithPainter(p)
-	w := &window{canvas: c, driver: d, title: title}
-
-	d.windowsMutex.Lock()
-	d.windows = append(d.windows, w)
-	d.windowsMutex.Unlock()
-	return w
+	_ = "STUB: not implemented"
+	return *new(fyne.Window)
 }
 
-func (d *driver) Device() fyne.Device {
-	return &d.device
-}
+func (d *driver) Device() fyne.Device { _ = "STUB: not implemented"; return *new(fyne.Device) }
 
-// RenderedTextSize looks up how bit a string would be if drawn on screen
 func (*driver) RenderedTextSize(text string, size float32, style fyne.TextStyle, source fyne.Resource) (fyne.Size, float32) {
-	return painter.RenderedTextSize(text, size, style, source)
+	_ = "STUB: not implemented"
+	return *new(fyne.Size), 0
 }
 
-func (*driver) Run() {
-	// no-op
-}
+func (*driver) Run() { _ = "STUB: not implemented"; return }
 
-func (*driver) StartAnimation(a *fyne.Animation) {
-	// currently no animations in test app, we just initialize it and leave
-	if a.AutoReverse {
-		a.Tick(0.0)
-	} else {
-		a.Tick(1.0)
-	}
-}
+func (*driver) StartAnimation(a *fyne.Animation) { _ = "STUB: not implemented"; return }
 
-func (*driver) StopAnimation(*fyne.Animation) {
-	// currently no animations in test app, do nothing
-}
+func (*driver) StopAnimation(*fyne.Animation) { _ = "STUB: not implemented"; return }
 
-func (*driver) Quit() {
-	// no-op
-}
+func (*driver) Quit() { _ = "STUB: not implemented"; return }
 
-func (*driver) Clipboard() fyne.Clipboard {
-	return nil
-}
+func (*driver) Clipboard() fyne.Clipboard { _ = "STUB: not implemented"; return *new(fyne.Clipboard) }
 
-func (d *driver) removeWindow(w *window) {
-	d.windowsMutex.Lock()
-	i := 0
-	for _, win := range d.windows {
-		if win == w {
-			break
-		}
-		i++
-	}
-
-	copy(d.windows[i:], d.windows[i+1:])
-	d.windows[len(d.windows)-1] = nil // Allow the garbage collector to reclaim the memory.
-	d.windows = d.windows[:len(d.windows)-1]
-
-	d.windowsMutex.Unlock()
-}
+func (d *driver) removeWindow(w *window) { _ = "STUB: not implemented"; return }
 
 func (*driver) DoubleTapDelay() time.Duration {
-	return 300 * time.Millisecond
+	_ = "STUB: not implemented"
+	return *new(time.Duration)
 }
 
-func (*driver) SetDisableScreenBlanking(_ bool) {
-	// no-op for test
-}
+func (*driver) SetDisableScreenBlanking(_ bool) { _ = "STUB: not implemented"; return }

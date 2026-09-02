@@ -6,15 +6,8 @@ type clipboard struct {
 	content string
 }
 
-func (c *clipboard) Content() string {
-	return c.content
-}
+func (c *clipboard) Content() string { _ = "STUB: not implemented"; return "" }
 
-func (c *clipboard) SetContent(content string) {
-	c.content = content
-}
+func (c *clipboard) SetContent(content string) { _ = "STUB: not implemented"; return }
 
-// NewClipboard returns a single use in-memory clipboard used for testing
-func NewClipboard() fyne.Clipboard {
-	return &clipboard{}
-}
+func NewClipboard() fyne.Clipboard { _ = "STUB: not implemented"; return *new(fyne.Clipboard) }

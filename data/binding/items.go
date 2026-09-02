@@ -1,228 +1,86 @@
 package binding
 
 import (
-	"bytes"
-
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/storage"
 )
 
-// Item supports binding any type T generically.
-//
-// Since: 2.6
 type Item[T any] interface {
 	DataItem
 	Get() (T, error)
 	Set(T) error
 }
 
-// ExternalItem supports binding any external value of type T.
-//
-// Since: 2.6
 type ExternalItem[T any] interface {
 	Item[T]
 	Reload() error
 }
 
-// NewItem returns a bindable value of type T that is managed internally.
-//
-// Since: 2.6
-func NewItem[T any](comparator func(T, T) bool) Item[T] {
-	return &item[T]{val: new(T), comparator: comparator}
-}
+func NewItem[T any](comparator func(T, T) bool) Item[T] { _ = "STUB: not implemented"; return nil }
 
-// BindItem returns a new bindable value that controls the contents of the provided variable of type T.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.6
 func BindItem[T any](val *T, comparator func(T, T) bool) ExternalItem[T] {
-	if val == nil {
-		val = new(T) // never allow a nil value pointer
-	}
-	b := &externalItem[T]{}
-	b.comparator = comparator
-	b.val = val
-	b.old = *val
-	return b
+	_ = "STUB: not implemented"
+	return nil
 }
 
-// Bool supports binding a bool value.
-//
-// Since: 2.0
 type Bool = Item[bool]
 
-// ExternalBool supports binding a bool value to an external value.
-//
-// Since: 2.0
 type ExternalBool = ExternalItem[bool]
 
-// NewBool returns a bindable bool value that is managed internally.
-//
-// Since: 2.0
-func NewBool() Bool {
-	return newItemComparable[bool]()
-}
+func NewBool() Bool { _ = "STUB: not implemented"; return *new(Bool) }
 
-// BindBool returns a new bindable value that controls the contents of the provided bool variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindBool(v *bool) ExternalBool {
-	return bindExternalComparable(v)
-}
+func BindBool(v *bool) ExternalBool { _ = "STUB: not implemented"; return *new(ExternalBool) }
 
-// Bytes supports binding a []byte value.
-//
-// Since: 2.2
 type Bytes = Item[[]byte]
 
-// ExternalBytes supports binding a []byte value to an external value.
-//
-// Since: 2.2
 type ExternalBytes = ExternalItem[[]byte]
 
-// NewBytes returns a bindable []byte value that is managed internally.
-//
-// Since: 2.2
-func NewBytes() Bytes {
-	return NewItem(bytes.Equal)
-}
+func NewBytes() Bytes { _ = "STUB: not implemented"; return *new(Bytes) }
 
-// BindBytes returns a new bindable value that controls the contents of the provided []byte variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.2
-func BindBytes(v *[]byte) ExternalBytes {
-	return BindItem(v, bytes.Equal)
-}
+func BindBytes(v *[]byte) ExternalBytes { _ = "STUB: not implemented"; return *new(ExternalBytes) }
 
-// Float supports binding a float64 value.
-//
-// Since: 2.0
 type Float = Item[float64]
 
-// ExternalFloat supports binding a float64 value to an external value.
-//
-// Since: 2.0
 type ExternalFloat = ExternalItem[float64]
 
-// NewFloat returns a bindable float64 value that is managed internally.
-//
-// Since: 2.0
-func NewFloat() Float {
-	return newItemComparable[float64]()
-}
+func NewFloat() Float { _ = "STUB: not implemented"; return *new(Float) }
 
-// BindFloat returns a new bindable value that controls the contents of the provided float64 variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindFloat(v *float64) ExternalFloat {
-	return bindExternalComparable(v)
-}
+func BindFloat(v *float64) ExternalFloat { _ = "STUB: not implemented"; return *new(ExternalFloat) }
 
-// Int supports binding a int value.
-//
-// Since: 2.0
 type Int = Item[int]
 
-// ExternalInt supports binding a int value to an external value.
-//
-// Since: 2.0
 type ExternalInt = ExternalItem[int]
 
-// NewInt returns a bindable int value that is managed internally.
-//
-// Since: 2.0
-func NewInt() Int {
-	return newItemComparable[int]()
-}
+func NewInt() Int { _ = "STUB: not implemented"; return *new(Int) }
 
-// BindInt returns a new bindable value that controls the contents of the provided int variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindInt(v *int) ExternalInt {
-	return bindExternalComparable(v)
-}
+func BindInt(v *int) ExternalInt { _ = "STUB: not implemented"; return *new(ExternalInt) }
 
-// Rune supports binding a rune value.
-//
-// Since: 2.0
 type Rune = Item[rune]
 
-// ExternalRune supports binding a rune value to an external value.
-//
-// Since: 2.0
 type ExternalRune = ExternalItem[rune]
 
-// NewRune returns a bindable rune value that is managed internally.
-//
-// Since: 2.0
-func NewRune() Rune {
-	return newItemComparable[rune]()
-}
+func NewRune() Rune { _ = "STUB: not implemented"; return *new(Rune) }
 
-// BindRune returns a new bindable value that controls the contents of the provided rune variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindRune(v *rune) ExternalRune {
-	return bindExternalComparable(v)
-}
+func BindRune(v *rune) ExternalRune { _ = "STUB: not implemented"; return *new(ExternalRune) }
 
-// String supports binding a string value.
-//
-// Since: 2.0
 type String = Item[string]
 
-// ExternalString supports binding a string value to an external value.
-//
-// Since: 2.0
 type ExternalString = ExternalItem[string]
 
-// NewString returns a bindable string value that is managed internally.
-//
-// Since: 2.0
-func NewString() String {
-	return newItemComparable[string]()
-}
+func NewString() String { _ = "STUB: not implemented"; return *new(String) }
 
-// BindString returns a new bindable value that controls the contents of the provided string variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.0
-func BindString(v *string) ExternalString {
-	return bindExternalComparable(v)
-}
+func BindString(v *string) ExternalString { _ = "STUB: not implemented"; return *new(ExternalString) }
 
-// URI supports binding a fyne.URI value.
-//
-// Since: 2.1
 type URI = Item[fyne.URI]
 
-// ExternalURI supports binding a fyne.URI value to an external value.
-//
-// Since: 2.1
 type ExternalURI = ExternalItem[fyne.URI]
 
-// NewURI returns a bindable fyne.URI value that is managed internally.
-//
-// Since: 2.1
-func NewURI() URI {
-	return NewItem(storage.EqualURI)
-}
+func NewURI() URI { _ = "STUB: not implemented"; return *new(URI) }
 
-// BindURI returns a new bindable value that controls the contents of the provided fyne.URI variable.
-// If your code changes the content of the variable this refers to you should call Reload() to inform the bindings.
-//
-// Since: 2.1
-func BindURI(v *fyne.URI) ExternalURI {
-	return BindItem(v, storage.EqualURI)
-}
+func BindURI(v *fyne.URI) ExternalURI { _ = "STUB: not implemented"; return *new(ExternalURI) }
 
 func newItemComparable[T bool | float64 | int | rune | string]() Item[T] {
-	return NewItem[T](func(a, b T) bool { return a == b })
+	_ = "STUB: not implemented"
+	return nil
 }
 
 type item[T any] struct {
@@ -232,31 +90,13 @@ type item[T any] struct {
 	val        *T
 }
 
-func (b *item[T]) Get() (T, error) {
-	b.lock.RLock()
-	defer b.lock.RUnlock()
+func (b *item[T]) Get() (T, error) { _ = "STUB: not implemented"; return *new(T), nil }
 
-	if b.val == nil {
-		return *new(T), nil
-	}
-	return *b.val, nil
-}
-
-func (b *item[T]) Set(val T) error {
-	b.lock.Lock()
-	equal := b.comparator(*b.val, val)
-	*b.val = val
-	b.lock.Unlock()
-
-	if !equal {
-		b.trigger()
-	}
-
-	return nil
-}
+func (b *item[T]) Set(val T) error { _ = "STUB: not implemented"; return nil }
 
 func bindExternalComparable[T bool | float64 | int | rune | string](val *T) ExternalItem[T] {
-	return BindItem(val, func(t1, t2 T) bool { return t1 == t2 })
+	_ = "STUB: not implemented"
+	return nil
 }
 
 type externalItem[T any] struct {
@@ -265,20 +105,6 @@ type externalItem[T any] struct {
 	old T
 }
 
-func (b *externalItem[T]) Set(val T) error {
-	b.lock.Lock()
-	if b.comparator(b.old, val) {
-		b.lock.Unlock()
-		return nil
-	}
-	*b.val = val
-	b.old = val
-	b.lock.Unlock()
+func (b *externalItem[T]) Set(val T) error { _ = "STUB: not implemented"; return nil }
 
-	b.trigger()
-	return nil
-}
-
-func (b *externalItem[T]) Reload() error {
-	return b.Set(*b.val)
-}
+func (b *externalItem[T]) Reload() error { _ = "STUB: not implemented"; return nil }

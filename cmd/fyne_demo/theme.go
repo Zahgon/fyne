@@ -13,5 +13,6 @@ type forcedVariant struct {
 }
 
 func (f *forcedVariant) Color(name fyne.ThemeColorName, _ fyne.ThemeVariant) color.Color {
-	return f.Theme.Color(name, f.variant)
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }

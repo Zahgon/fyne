@@ -6,96 +6,36 @@ import (
 	"fyne.io/fyne/v2"
 )
 
-// Declare conformity with CanvasObject interface
 var _ fyne.CanvasObject = (*Rectangle)(nil)
 
-// Rectangle describes a colored rectangle primitive in a Fyne canvas
 type Rectangle struct {
 	baseObject
 
-	FillColor   color.Color // The rectangle fill color
-	StrokeColor color.Color // The rectangle stroke color
-	StrokeWidth float32     // The stroke width of the rectangle
-	// The radius of the rectangle corners
-	//
-	// Since: 2.4
+	FillColor   color.Color
+	StrokeColor color.Color
+	StrokeWidth float32
+
 	CornerRadius float32
 
-	// Enforce an aspect ratio for the rectangle, the content will be made shorter or narrower
-	// to meet the requested aspect, if set.
-	//
-	// Since: 2.7
 	Aspect float32
 
-	// The radius of the rectangle top-right corner only.
-	// Note: Falls back to [Rectangle.CornerRadius] if 0.
-	//
-	// Since: 2.7
 	TopRightCornerRadius float32
 
-	// The radius of the rectangle top-left corner only.
-	// Note: Falls back to [Rectangle.CornerRadius] if 0.
-	//
-	// Since: 2.7
 	TopLeftCornerRadius float32
 
-	// The radius of the rectangle bottom-right corner only.
-	// Note: Falls back to [Rectangle.CornerRadius] if 0.
-	//
-	// Since: 2.7
 	BottomRightCornerRadius float32
 
-	// The radius of the rectangle bottom-left corner only.
-	// Note: Falls back to [Rectangle.CornerRadius] if 0.
-	//
-	// Since: 2.7
 	BottomLeftCornerRadius float32
 
-	// Support shadow configuration
-	//
-	// Since: 2.8
 	Shadow Shadow
 }
 
-// Hide will set this rectangle to not be visible
-func (r *Rectangle) Hide() {
-	r.baseObject.Hide()
+func (r *Rectangle) Hide() { _ = "STUB: not implemented"; return }
 
-	repaint(r)
-}
+func (r *Rectangle) Move(pos fyne.Position) { _ = "STUB: not implemented"; return }
 
-// Move the rectangle to a new position, relative to its parent / canvas
-func (r *Rectangle) Move(pos fyne.Position) {
-	if r.Position() == pos {
-		return
-	}
+func (r *Rectangle) Refresh() { _ = "STUB: not implemented"; return }
 
-	r.baseObject.Move(pos)
+func (r *Rectangle) Resize(s fyne.Size) { _ = "STUB: not implemented"; return }
 
-	repaint(r)
-}
-
-// Refresh causes this rectangle to be redrawn with its configured state.
-func (r *Rectangle) Refresh() {
-	Refresh(r)
-}
-
-// Resize on a rectangle updates the new size of this object.
-// If it has a stroke width this will cause it to Refresh.
-// If Aspect is non-zero it may cause the rectangle to be smaller than the requested size.
-func (r *Rectangle) Resize(s fyne.Size) {
-	if s == r.Size() {
-		return
-	}
-
-	r.baseObject.Resize(s)
-
-	Refresh(r)
-}
-
-// NewRectangle returns a new Rectangle instance
-func NewRectangle(c color.Color) *Rectangle {
-	return &Rectangle{
-		FillColor: c,
-	}
-}
+func NewRectangle(c color.Color) *Rectangle { _ = "STUB: not implemented"; return nil }

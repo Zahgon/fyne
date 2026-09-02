@@ -7,69 +7,28 @@ import (
 	"fyne.io/fyne/v2/data/binding"
 )
 
-// basicBinder stores a DataItem and a function to be called when it changes.
-// It provides a convenient way to replace data and callback independently.
 type basicBinder struct {
 	callback atomic.Pointer[func(binding.DataItem)]
 
 	dataListenerPairLock sync.RWMutex
-	dataListenerPair     annotatedListener // access guarded by dataListenerPairLock
+	dataListenerPair     annotatedListener
 }
 
-// Bind replaces the data item whose changes are tracked by the callback function.
-func (binder *basicBinder) Bind(data binding.DataItem) {
-	listener := binding.NewDataListener(func() { // NB: listener captures `data` but always calls the up-to-date callback
-		f := binder.callback.Load()
-		if f == nil || *f == nil {
-			return
-		}
+func (binder *basicBinder) Bind(data binding.DataItem) { _ = "STUB: not implemented"; return }
 
-		(*f)(data)
-	})
-	data.AddListener(listener)
-	listenerInfo := annotatedListener{
-		data:     data,
-		listener: listener,
-	}
-
-	binder.dataListenerPairLock.Lock()
-	binder.unbindLocked()
-	binder.dataListenerPair = listenerInfo
-	binder.dataListenerPairLock.Unlock()
-}
-
-// CallWithData passes the currently bound data item as an argument to the
-// provided function.
 func (binder *basicBinder) CallWithData(f func(data binding.DataItem)) {
-	binder.dataListenerPairLock.RLock()
-	data := binder.dataListenerPair.data
-	binder.dataListenerPairLock.RUnlock()
-	f(data)
+	_ = "STUB: not implemented"
+	return
 }
 
-// SetCallback replaces the function to be called when the data changes.
 func (binder *basicBinder) SetCallback(f func(data binding.DataItem)) {
-	binder.callback.Store(&f)
+	_ = "STUB: not implemented"
+	return
 }
 
-// Unbind requests the callback to be no longer called when the previously bound
-// data item changes.
-func (binder *basicBinder) Unbind() {
-	binder.dataListenerPairLock.Lock()
-	binder.unbindLocked()
-	binder.dataListenerPairLock.Unlock()
-}
+func (binder *basicBinder) Unbind() { _ = "STUB: not implemented"; return }
 
-// unbindLocked expects the caller to hold dataListenerPairLock.
-func (binder *basicBinder) unbindLocked() {
-	previousListener := binder.dataListenerPair
-	binder.dataListenerPair = annotatedListener{nil, nil}
-
-	if previousListener.listener == nil || previousListener.data == nil {
-		return
-	}
-	previousListener.data.RemoveListener(previousListener.listener)
-}
+func (binder *basicBinder) unbindLocked() { _ = "STUB: not implemented"; return }
 
 type annotatedListener struct {
 	data     binding.DataItem

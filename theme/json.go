@@ -1,98 +1,48 @@
 package theme
 
 import (
-	"encoding/json"
 	"image/color"
 	"io"
-	"strings"
 
 	"fyne.io/fyne/v2"
-	fynecolor "fyne.io/fyne/v2/internal/color"
-	"fyne.io/fyne/v2/storage"
 )
 
-// FromJSON returns a Theme created from the given JSON metadata.
-// Any values not present in the data will fall back to the default theme.
-// If a parse error occurs it will be returned along with a default theme.
-//
-// Since: 2.2
 func FromJSON(data string) (fyne.Theme, error) {
-	return FromJSONReader(strings.NewReader(data))
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme), nil
 }
 
-// FromJSONWithFallback returns a Theme created from the given JSON metadata.
-// Any values not present in the data will fall back to the specified theme.
-// If a parse error occurs it will be returned along with a specified fallback theme.
-//
-// Since: 2.7
 func FromJSONWithFallback(data string, fallback fyne.Theme) (fyne.Theme, error) {
-	return fromJSONWithFallback(strings.NewReader(data), fallback)
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme), nil
 }
 
-// FromJSONReader returns a Theme created from the given JSON metadata through the reader.
-// Any values not present in the data will fall back to the default theme.
-// If a parse error occurs it will be returned along with a default theme.
-//
-// Since: 2.2
 func FromJSONReader(r io.Reader) (fyne.Theme, error) {
-	return fromJSONWithFallback(r, DefaultTheme())
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme), nil
 }
 
-// FromJSONReaderWithFallback returns a Theme created from the given JSON metadata through the reader.
-// Any values not present in the data will fall back to the specified theme.
-// If a parse error occurs it will be returned along with a specified fallback theme.
-//
-// Since: 2.7
 func FromJSONReaderWithFallback(r io.Reader, fallback fyne.Theme) (fyne.Theme, error) {
-	return fromJSONWithFallback(r, fallback)
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme), nil
 }
 
 func fromJSONWithFallback(r io.Reader, fallback fyne.Theme) (fyne.Theme, error) {
-	var th *schema
-	if err := json.NewDecoder(r).Decode(&th); err != nil {
-		return fallback, err
-	}
-
-	return &jsonTheme{data: th, fallback: fallback}, nil
+	_ = "STUB: not implemented"
+	return *new(fyne.Theme), nil
 }
 
 type jsonColor struct {
 	color color.Color
 }
 
-func (h *jsonColor) UnmarshalJSON(b []byte) error {
-	var str string
-	if err := json.Unmarshal(b, &str); err != nil {
-		return err
-	}
-	return h.parseColor(str)
-}
+func (h *jsonColor) UnmarshalJSON(b []byte) error { _ = "STUB: not implemented"; return nil }
 
-func (h *jsonColor) parseColor(str string) error {
-	c, err := fynecolor.Parse(str)
-	if err != nil {
-		return err
-	}
-
-	h.color = c
-	return nil
-}
+func (h *jsonColor) parseColor(str string) error { _ = "STUB: not implemented"; return nil }
 
 type uriString string
 
-func (u uriString) resource() fyne.Resource {
-	uri, err := storage.ParseURI(string(u))
-	if err != nil {
-		fyne.LogError("Failed to parse URI", err)
-		return nil
-	}
-	r, err := storage.LoadResourceFromURI(uri)
-	if err != nil {
-		fyne.LogError("Failed to load resource from URI", err)
-		return nil
-	}
-	return r
-}
+func (u uriString) resource() fyne.Resource { _ = "STUB: not implemented"; return *new(fyne.Resource) }
 
 type schema struct {
 	Colors      map[string]jsonColor `json:"Colors,omitempty"`
@@ -110,61 +60,20 @@ type jsonTheme struct {
 }
 
 func (t *jsonTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color {
-	switch variant {
-	case VariantLight:
-		if val, ok := t.data.LightColors[string(name)]; ok {
-			return val.color
-		}
-	case VariantDark:
-		if val, ok := t.data.DarkColors[string(name)]; ok {
-			return val.color
-		}
-	}
-
-	if val, ok := t.data.Colors[string(name)]; ok {
-		return val.color
-	}
-
-	return t.fallback.Color(name, variant)
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }
 
 func (t *jsonTheme) Font(style fyne.TextStyle) fyne.Resource {
-	if val, ok := t.data.Fonts[styleString(style)]; ok {
-		r := val.resource()
-		if r != nil {
-			return r
-		}
-	}
-	return t.fallback.Font(style)
+	_ = "STUB: not implemented"
+	return *new(fyne.Resource)
 }
 
 func (t *jsonTheme) Icon(name fyne.ThemeIconName) fyne.Resource {
-	if val, ok := t.data.Icons[string(name)]; ok {
-		r := val.resource()
-		if r != nil {
-			return r
-		}
-	}
-	return t.fallback.Icon(name)
+	_ = "STUB: not implemented"
+	return *new(fyne.Resource)
 }
 
-func (t *jsonTheme) Size(name fyne.ThemeSizeName) float32 {
-	if val, ok := t.data.Sizes[string(name)]; ok {
-		return val
-	}
+func (t *jsonTheme) Size(name fyne.ThemeSizeName) float32 { _ = "STUB: not implemented"; return 0 }
 
-	return t.fallback.Size(name)
-}
-
-func styleString(s fyne.TextStyle) string {
-	if s.Bold {
-		if s.Italic {
-			return "boldItalic"
-		}
-		return "bold"
-	}
-	if s.Monospace {
-		return "monospace"
-	}
-	return "regular"
-}
+func styleString(s fyne.TextStyle) string { _ = "STUB: not implemented"; return "" }

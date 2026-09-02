@@ -1,19 +1,11 @@
 package app
 
 import (
-	"os"
-	"path/filepath"
-
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/internal/app"
 	"fyne.io/fyne/v2/internal/async"
-	"fyne.io/fyne/v2/internal/build"
-	"fyne.io/fyne/v2/theme"
 )
 
-// SettingsSchema is used for loading and storing global settings
 type SettingsSchema struct {
-	// these items are used for global settings load
 	ThemeName         string  `json:"theme"`
 	Scale             float32 `json:"scale"`
 	PrimaryColor      string  `json:"primary_color"`
@@ -22,12 +14,8 @@ type SettingsSchema struct {
 	DisableAnimations bool    `json:"no_animations"`
 }
 
-// StoragePath returns the location of the settings storage
-func (*SettingsSchema) StoragePath() string {
-	return filepath.Join(app.RootConfigDir(), "settings.json")
-}
+func (*SettingsSchema) StoragePath() string { _ = "STUB: not implemented"; return "" }
 
-// Declare conformity with Settings interface
 var _ fyne.Settings = (*settings)(nil)
 
 const (
@@ -42,119 +30,48 @@ type settings struct {
 
 	listeners       []func(fyne.Settings)
 	changeListeners async.Map[chan fyne.Settings, bool]
-	watcher         any // normally *fsnotify.Watcher or nil - avoid import in this file
+	watcher         any
 
 	schema SettingsSchema
 }
 
-func (*settings) BuildType() fyne.BuildType {
-	return build.Mode
-}
+func (*settings) BuildType() fyne.BuildType { _ = "STUB: not implemented"; return *new(fyne.BuildType) }
 
-func (s *settings) PrimaryColor() string {
-	return s.schema.PrimaryColor
-}
+func (s *settings) PrimaryColor() string { _ = "STUB: not implemented"; return "" }
 
-// OverrideTheme allows the settings app to temporarily preview different theme details.
-// Please make sure that you remember the original settings and call this again to revert the change.
-//
-// Deprecated: Use container.NewThemeOverride to change the appearance of part of your application.
-func (s *settings) OverrideTheme(t fyne.Theme, name string) {
-	s.schema.PrimaryColor = name
-	s.theme = t
-}
+func (s *settings) OverrideTheme(t fyne.Theme, name string) { _ = "STUB: not implemented"; return }
 
-func (s *settings) Theme() fyne.Theme {
-	if s == nil {
-		fyne.LogError("Attempt to access current Fyne theme when no app is started", nil)
-		return nil
-	}
-	return s.theme
-}
+func (s *settings) Theme() fyne.Theme { _ = "STUB: not implemented"; return *new(fyne.Theme) }
 
-func (s *settings) SetTheme(t fyne.Theme) {
-	s.themeSpecified = true
-	s.applyTheme(t, s.variant)
-}
+func (s *settings) SetTheme(t fyne.Theme) { _ = "STUB: not implemented"; return }
 
-func (s *settings) ShowAnimations() bool {
-	return !s.schema.DisableAnimations && !build.NoAnimations
-}
+func (s *settings) ShowAnimations() bool { _ = "STUB: not implemented"; return false }
 
 func (s *settings) ThemeVariant() fyne.ThemeVariant {
-	return s.variant
+	_ = "STUB: not implemented"
+	return *new(fyne.ThemeVariant)
 }
 
 func (s *settings) applyTheme(t fyne.Theme, variant fyne.ThemeVariant) {
-	s.variant = variant
-	s.theme = t
-	s.apply()
+	_ = "STUB: not implemented"
+	return
 }
 
-func (s *settings) Scale() float32 {
-	if s.schema.Scale < 0.0 {
-		return 1.0 // catching any really old data still using the `-1`  value for "auto" scale
-	}
-	return s.schema.Scale
-}
+func (s *settings) Scale() float32 { _ = "STUB: not implemented"; return 0 }
 
 func (s *settings) AddChangeListener(listener chan fyne.Settings) {
-	s.changeListeners.Store(listener, true) // the boolean is just a dummy value here.
+	_ = "STUB: not implemented"
+	return
 }
 
-func (s *settings) AddListener(listener func(fyne.Settings)) {
-	s.listeners = append(s.listeners, listener)
-}
+func (s *settings) AddListener(listener func(fyne.Settings)) { _ = "STUB: not implemented"; return }
 
-func (s *settings) apply() {
-	s.changeListeners.Range(func(listener chan fyne.Settings, _ bool) bool {
-		select {
-		case listener <- s:
-		default:
-			l := listener
-			go func() { l <- s }()
-		}
-		return true
-	})
+func (s *settings) apply() { _ = "STUB: not implemented"; return }
 
-	for _, l := range s.listeners {
-		l(s)
-	}
-}
+func (s *settings) fileChanged() { _ = "STUB: not implemented"; return }
 
-func (s *settings) fileChanged() {
-	s.load()
-	s.apply()
-}
+func (s *settings) setupTheme() { _ = "STUB: not implemented"; return }
 
-func (s *settings) setupTheme() {
-	name := s.explicitThemeVariantName()
-	variant := app.DefaultVariant()
-	effectiveTheme := s.theme
-	if !s.themeSpecified {
-		effectiveTheme = theme.DefaultTheme()
-	}
-	switch name {
-	case themeVariantNameLight:
-		variant = theme.VariantLight
-	case themeVariantNameDark:
-		variant = theme.VariantDark
-	}
+func (s *settings) explicitThemeVariantName() string { _ = "STUB: not implemented"; return "" }
 
-	s.applyTheme(effectiveTheme, variant)
-}
-
-func (s *settings) explicitThemeVariantName() string {
-	if name := os.Getenv("FYNE_THEME"); name != "" {
-		return name
-	}
-
-	return s.schema.ThemeName
-}
-
-func loadSettings() *settings {
-	s := &settings{}
-	s.load()
-
-	return s
-}
+func loadSettings() *settings { _ = "STUB: not implemented"; return nil }

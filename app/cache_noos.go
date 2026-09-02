@@ -2,12 +2,4 @@
 
 package app
 
-import (
-	"os"
-	"path/filepath"
-)
-
-func rootCacheDir() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".config", "fyne")
-}
+func rootCacheDir() string { _ = "STUB: not implemented"; return "" }

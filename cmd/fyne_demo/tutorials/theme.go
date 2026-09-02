@@ -4,7 +4,6 @@ import (
 	"image/color"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/theme"
 )
 
 var (
@@ -13,59 +12,23 @@ var (
 	grey   = &color.Gray{Y: 123}
 )
 
-// customTheme is a simple demonstration of a bespoke theme loaded by a Fyne app.
 type customTheme struct{}
 
 func (customTheme) Color(c fyne.ThemeColorName, _ fyne.ThemeVariant) color.Color {
-	switch c {
-	case theme.ColorNameBackground:
-		return purple
-	case theme.ColorNameButton, theme.ColorNameDisabled:
-		return color.Black
-	case theme.ColorNamePlaceHolder, theme.ColorNameScrollBar:
-		return grey
-	case theme.ColorNamePrimary, theme.ColorNameHover, theme.ColorNameFocus:
-		return orange
-	case theme.ColorNameShadow:
-		return &color.RGBA{R: 0xcc, G: 0xcc, B: 0xcc, A: 0xcc}
-	default:
-		return color.White
-	}
+	_ = "STUB: not implemented"
+	return *new(color.Color)
 }
 
 func (customTheme) Font(style fyne.TextStyle) fyne.Resource {
-	return theme.DefaultTheme().Font(style)
+	_ = "STUB: not implemented"
+	return *new(fyne.Resource)
 }
 
 func (customTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
-	return theme.DefaultTheme().Icon(n)
+	_ = "STUB: not implemented"
+	return *new(fyne.Resource)
 }
 
-func (customTheme) Size(s fyne.ThemeSizeName) float32 {
-	switch s {
-	case theme.SizeNamePadding:
-		return 8
-	case theme.SizeNameInlineIcon:
-		return 20
-	case theme.SizeNameScrollBar:
-		return 10
-	case theme.SizeNameScrollBarSmall:
-		return 5
-	case theme.SizeNameText:
-		return 18
-	case theme.SizeNameHeadingText:
-		return 30
-	case theme.SizeNameSubHeadingText:
-		return 25
-	case theme.SizeNameCaptionText:
-		return 15
-	case theme.SizeNameInputBorder:
-		return 1
-	default:
-		return 0
-	}
-}
+func (customTheme) Size(s fyne.ThemeSizeName) float32 { _ = "STUB: not implemented"; return 0 }
 
-func newCustomTheme() fyne.Theme {
-	return &customTheme{}
-}
+func newCustomTheme() fyne.Theme { _ = "STUB: not implemented"; return *new(fyne.Theme) }

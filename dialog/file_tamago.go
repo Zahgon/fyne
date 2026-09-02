@@ -5,5 +5,6 @@ package dialog
 import "fyne.io/fyne/v2"
 
 func getFavoriteLocations() (map[string]fyne.ListableURI, error) {
-	return map[string]fyne.ListableURI{}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

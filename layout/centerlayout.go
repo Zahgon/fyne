@@ -2,40 +2,20 @@ package layout
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/internal"
 )
 
-// Declare conformity with Layout interface
 var _ fyne.Layout = (*centerLayout)(nil)
 
 type centerLayout struct{}
 
-// NewCenterLayout creates a new CenterLayout instance
-func NewCenterLayout() fyne.Layout {
-	return &centerLayout{}
-}
+func NewCenterLayout() fyne.Layout { _ = "STUB: not implemented"; return *new(fyne.Layout) }
 
-// Layout is called to pack all child objects into a specified size.
-// For CenterLayout this sets all children to their minimum size, centered within the space.
 func (*centerLayout) Layout(objects []fyne.CanvasObject, size fyne.Size) {
-	for _, child := range objects {
-		childMin := child.MinSize()
-		child.Resize(childMin)
-		child.Move(fyne.NewPos((size.Width-childMin.Width)/2, (size.Height-childMin.Height)/2))
-	}
+	_ = "STUB: not implemented"
+	return
 }
 
-// MinSize finds the smallest size that satisfies all the child objects.
-// For CenterLayout this is determined simply as the MinSize of the largest child.
 func (*centerLayout) MinSize(objects []fyne.CanvasObject) fyne.Size {
-	minSize := fyne.NewSize(0, 0)
-	for _, child := range objects {
-		if !child.Visible() {
-			continue
-		}
-
-		minSize = internal.MaxSizes(minSize, child.MinSize())
-	}
-
-	return minSize
+	_ = "STUB: not implemented"
+	return *new(fyne.Size)
 }

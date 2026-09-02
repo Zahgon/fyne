@@ -2,70 +2,40 @@ package container
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/internal"
 	"fyne.io/fyne/v2/widget"
 )
 
-// Declare conformity with Widget interface
 var _ fyne.Widget = (*Clip)(nil)
 
-// Clip describes a rectangular region  that will clip anything outside its bounds.
-//
-// Since: 2.7
 type Clip struct {
 	widget.BaseWidget
 	Content fyne.CanvasObject
 }
 
-// NewClip returns a new rectangular clipping object.
-//
-// Since: 2.7
-func NewClip(content fyne.CanvasObject) *Clip {
-	return &Clip{Content: content}
-}
+func NewClip(content fyne.CanvasObject) *Clip { _ = "STUB: not implemented"; return nil }
 
 func (c *Clip) CreateRenderer() fyne.WidgetRenderer {
-	c.ExtendBaseWidget(c)
-	return newClipRenderer(c)
+	_ = "STUB: not implemented"
+	return *new(fyne.WidgetRenderer)
 }
 
-// MinSize for a Clip simply returns Size{1, 1} as there is no
-// explicit content
-func (c *Clip) MinSize() fyne.Size {
-	c.ExtendBaseWidget(c)
-	return fyne.NewSize(1, 1)
-}
+func (c *Clip) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
 type clipRenderer struct {
 	c       *Clip
 	objects []fyne.CanvasObject
 }
 
-func newClipRenderer(c *Clip) *clipRenderer {
-	return &clipRenderer{c: c, objects: []fyne.CanvasObject{c.Content}}
-}
+func newClipRenderer(c *Clip) *clipRenderer { _ = "STUB: not implemented"; return nil }
 
-func (*clipRenderer) Destroy() {
-}
+func (*clipRenderer) Destroy() { _ = "STUB: not implemented"; return }
 
-func (r *clipRenderer) Layout(s fyne.Size) {
-	o := r.objects[0]
-	o.Resize(internal.MaxSizes(s, o.MinSize()))
-}
+func (r *clipRenderer) Layout(s fyne.Size) { _ = "STUB: not implemented"; return }
 
-func (r *clipRenderer) MinSize() fyne.Size {
-	return r.objects[0].MinSize()
-}
+func (r *clipRenderer) MinSize() fyne.Size { _ = "STUB: not implemented"; return *new(fyne.Size) }
 
-func (r *clipRenderer) Objects() []fyne.CanvasObject {
-	return r.objects
-}
+func (r *clipRenderer) Objects() []fyne.CanvasObject { _ = "STUB: not implemented"; return nil }
 
-func (r *clipRenderer) Refresh() {
-	r.objects[0] = r.c.Content
-	r.Layout(r.c.Size())
-	r.objects[0].Refresh()
-}
+func (r *clipRenderer) Refresh() { _ = "STUB: not implemented"; return }
 
-// IsClip marks this widget as clipping. It is on the renderer to avoid a public API addition.
-func (*clipRenderer) IsClip() {}
+func (*clipRenderer) IsClip() { _ = "STUB: not implemented"; return }

@@ -2,4 +2,4 @@
 
 package lang
 
-func initRuntime() {}
+func initRuntime() { _ = "STUB: not implemented"; return }

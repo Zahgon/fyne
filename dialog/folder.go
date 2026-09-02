@@ -7,36 +7,14 @@ import (
 
 var folderFilter = storage.NewMimeTypeFileFilter([]string{"application/x-directory"})
 
-// NewFolderOpen creates a file dialog allowing the user to choose a folder to
-// open. The callback function will run when the dialog closes. The URI will be
-// nil when the user cancels or when nothing is selected.
-//
-// The dialog will appear over the window specified when Show() is called.
-//
-// Since: 1.4
 func NewFolderOpen(callback func(fyne.ListableURI, error), parent fyne.Window) *FileDialog {
-	dialog := &FileDialog{}
-	dialog.callback = callback
-	dialog.parent = parent
-	dialog.filter = folderFilter
-	return dialog
+	_ = "STUB: not implemented"
+	return nil
 }
 
-// ShowFolderOpen creates and shows a file dialog allowing the user to choose a
-// folder to open. The callback function will run when the dialog closes. The
-// URI will be nil when the user cancels or when nothing is selected.
-//
-// The dialog will appear over the window specified.
-//
-// Since: 1.4
 func ShowFolderOpen(callback func(fyne.ListableURI, error), parent fyne.Window) {
-	dialog := NewFolderOpen(callback, parent)
-	if fileOpenOSOverride(dialog) {
-		return
-	}
-	dialog.Show()
+	_ = "STUB: not implemented"
+	return
 }
 
-func (f *FileDialog) isDirectory() bool {
-	return f.filter == folderFilter
-}
+func (f *FileDialog) isDirectory() bool { _ = "STUB: not implemented"; return false }

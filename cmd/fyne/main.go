@@ -1,6 +1,3 @@
-// Run a command line helper for various Fyne tools.
-//
-// Deprecated: Install fyne.io/tools/cmd/fyne for latest version.
 package main
 
 import (
@@ -32,7 +29,6 @@ func main() {
 			commands.Translate(),
 			commands.Build(),
 
-			// Deprecated: Use "go mod vendor" instead.
 			commands.Vendor(), //lint:ignore SA1019 This whole tool is deprecated.
 		},
 	}

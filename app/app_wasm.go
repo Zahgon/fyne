@@ -3,59 +3,27 @@
 package app
 
 import (
-	"encoding/base64"
-	"fmt"
-	"net/http"
 	"syscall/js"
 	"time"
 
 	"fyne.io/fyne/v2"
-	intRepo "fyne.io/fyne/v2/internal/repository"
-	"fyne.io/fyne/v2/storage/repository"
 )
 
 func (a *fyneApp) ScheduleNotification(n *fyne.Notification, when time.Time) (*fyne.ScheduledNotification, error) {
-	return a.scheduleViaScheduler(n, when)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (a *fyneApp) CancelScheduledNotification(id string) error {
-	return a.cancelViaScheduler(id)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (a *fyneApp) SendNotification(n *fyne.Notification) {
-	notification := js.Global().Get("window").Get("Notification")
-	if notification.IsUndefined() {
-		fyne.LogError("Current browser does not support notifications.", nil)
-		return
-	}
-
-	permission := notification.Get("permission")
-	if permission.Type() != js.TypeString || permission.String() != "granted" {
-		request := js.FuncOf(func(this js.Value, args []js.Value) any {
-			if len(args) > 0 && args[0].Type() == js.TypeString && args[0].String() == "granted" {
-				a.showNotification(n, &notification)
-			} else {
-				fyne.LogError("User rejected the request for notifications.", nil)
-			}
-			return nil
-		})
-		defer request.Release()
-		notification.Call("requestPermission", request)
-		return
-	}
-
-	a.showNotification(n, &notification)
-}
+func (a *fyneApp) SendNotification(n *fyne.Notification) { _ = "STUB: not implemented"; return }
 
 func (a *fyneApp) showNotification(data *fyne.Notification, notification *js.Value) {
-	icon := a.icon.Content()
-	base64Str := base64.StdEncoding.EncodeToString(icon)
-	mimeType := http.DetectContentType(icon)
-	base64Img := fmt.Sprintf("data:%s;base64,%s", mimeType, base64Str)
-	notification.New(data.Title, map[string]any{
-		"body": data.Content,
-		"icon": base64Img,
-	})
+	_ = "STUB: not implemented"
+	return
 }
 
 var themeChanged = js.FuncOf(func(this js.Value, args []js.Value) any {
@@ -65,20 +33,8 @@ var themeChanged = js.FuncOf(func(this js.Value, args []js.Value) any {
 	return nil
 })
 
-func watchTheme(_ *settings) {
-	js.Global().Call("matchMedia", "(prefers-color-scheme: dark)").Call("addEventListener", "change", themeChanged)
-}
+func watchTheme(_ *settings) { _ = "STUB: not implemented"; return }
 
-func stopWatchingTheme() {
-	js.Global().Call("matchMedia", "(prefers-color-scheme: dark)").Call("removeEventListener", "change", themeChanged)
-}
+func stopWatchingTheme() { _ = "STUB: not implemented"; return }
 
-func (a *fyneApp) registerRepositories() {
-	repo, err := intRepo.NewIndexDBRepository()
-	if err != nil {
-		fyne.LogError("failed to create repository: %v", err)
-		return
-	}
-
-	repository.Register("idbfile", repo)
-}
+func (a *fyneApp) registerRepositories() { _ = "STUB: not implemented"; return }
